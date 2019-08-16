@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+
+
+go_tool_library(
+    name = "gocyclo",
+    srcs = ["gocyclo.go"],
+    importpath = "golang.cisco.com/golinters/pkg/gocyclo",
+    deps = [
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@com_github_golangci_gocyclo//pkg/gocyclo:go_tool_library",
+         "//pkg/util:go_tool_library",
+                
+    ],
+    visibility = ["//visibility:public"],
+)

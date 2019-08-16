@@ -1,0 +1,19 @@
+--- a/pkg/gocyclo/BUILD.bazel	2019-07-19 16:01:34.505237231 -0700
++++ b/pkg/gocyclo/BUILD.bazel	2019-07-19 22:29:58.951521123 -0700
+@@ -1,8 +1,15 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = ["gocyclo.go"],
+     importpath = "github.com/golangci/gocyclo/pkg/gocyclo",
++    visibility = ["//visibility:public"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["gocyclo.go"],
++    importpath = "github.com/golangci/gocyclo/pkg/gocyclo",
+     visibility = ["//visibility:public"],
+ )

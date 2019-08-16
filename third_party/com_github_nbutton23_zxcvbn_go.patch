@@ -1,0 +1,238 @@
+--- a/BUILD.bazel
++++ b/BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -13,6 +13,19 @@ go_library(
+     ],
+ )
+ 
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["zxcvbn.go"],
++    importpath = "github.com/nbutton23/zxcvbn-go",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//match:go_tool_library",
++        "//matching:go_tool_library",
++        "//scoring:go_tool_library",
++        "//utils/math:go_tool_library",
++    ],
++)
++
+ go_test(
+     name = "go_default_test",
+     srcs = ["zxcvbn_test.go"],
+
+     
+--- a/match/BUILD.bazel
++++ b/match/BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -6,3 +6,10 @@ go_library(
+     importpath = "github.com/nbutton23/zxcvbn-go/match",
+     visibility = ["//visibility:public"],
+ )
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["match.go"],
++    importpath = "github.com/nbutton23/zxcvbn-go/match",
++    visibility = ["//visibility:public"],
++)
++
+
+--- a/matching/BUILD.bazel	
++++ b/matching/BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -21,6 +21,27 @@ go_library(
+     ],
+ )
+ 
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "dateMatchers.go",
++        "dictionaryMatch.go",
++        "leet.go",
++        "matching.go",
++        "repeatMatch.go",
++        "sequenceMatch.go",
++        "spatialMatch.go",
++    ],
++    importpath = "github.com/nbutton23/zxcvbn-go/matching",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//adjacency:go_tool_library",
++        "//entropy:go_tool_library",
++        "//frequency:go_tool_library",
++        "//match:go_tool_library",
++    ],
++)
++
+ go_test(
+     name = "go_default_test",
+     srcs = ["matching_test.go"],
+
+--- a/utils/math/BUILD.bazel	
++++ b/utils/math/BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,6 +7,13 @@ go_library(
+     visibility = ["//visibility:public"],
+ )
+ 
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["mathutils.go"],
++    importpath = "github.com/nbutton23/zxcvbn-go/utils/math",
++    visibility = ["//visibility:public"],
++)
++
+ go_test(
+     name = "go_default_test",
+     srcs = ["mathutils_test.go"],
+
+
+--- a/adjacency/BUILD.bazel	
++++ b/adjacency/BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -8,6 +8,15 @@ go_library(
+     deps = ["//data:go_default_library"],
+ )
+ 
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["adjcmartix.go"],
++    importpath = "github.com/nbutton23/zxcvbn-go/adjacency",
++    visibility = ["//visibility:public"],
++    deps = ["//data:go_tool_library"],
++)
++
++
+ go_test(
+     name = "go_default_test",
+     srcs = ["adjacmartix_test.go"],
+
+
+--- a/data/BUILD.bazel	
++++ b/data/BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -6,3 +6,10 @@ go_library(
+     importpath = "github.com/nbutton23/zxcvbn-go/data",
+     visibility = ["//visibility:public"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["bindata.go"],
++    importpath = "github.com/nbutton23/zxcvbn-go/data",
++    visibility = ["//visibility:public"],
++)
+
+
+--- a/entropy/BUILD.bazel	
++++ b/entropy/BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -12,6 +12,18 @@ go_library(
+     ],
+ )
+ 
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["entropyCalculator.go"],
++    importpath = "github.com/nbutton23/zxcvbn-go/entropy",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//adjacency:go_tool_library",
++        "//match:go_tool_library",
++        "//utils/math:go_tool_library",
++    ],
++)
++
+ go_test(
+     name = "go_default_test",
+     srcs = ["entropyCalculator_test.go"],
+
+
+--- a/scoring/BUILD.bazel	
++++ b/scoring/BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -11,3 +11,16 @@ go_library(
+         "//utils/math:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["scoring.go"],
++    importpath = "github.com/nbutton23/zxcvbn-go/scoring",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//entropy:go_tool_library",
++        "//match:go_tool_library",
++        "//utils/math:go_tool_library",
++    ],
++)
++
+
+--- a/frequency/BUILD.bazel	
++++ b/frequency/BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,10 @@ go_library(
+     visibility = ["//visibility:public"],
+     deps = ["//data:go_default_library"],
+ )
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["frequency.go"],
++    importpath = "github.com/nbutton23/zxcvbn-go/frequency",
++    visibility = ["//visibility:public"],
++    deps = ["//data:go_tool_library"],
++)
+
+
+
+
+
+

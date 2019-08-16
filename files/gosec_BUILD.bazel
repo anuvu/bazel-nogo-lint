@@ -1,0 +1,56 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test","go_tool_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "analyzer.go",
+        "call_list.go",
+        "config.go",
+        "helpers.go",
+        "import_tracker.go",
+        "issue.go",
+        "resolve.go",
+        "rule.go",
+    ],
+    importpath = "github.com/golangci/gosec",
+    visibility = ["//visibility:public"],
+    deps = ["@org_golang_x_tools//go/loader:go_default_library"],
+)
+
+go_tool_library(
+    name = "go_tool_library",
+    srcs = [
+        "analyzer.go",
+        "call_list.go",
+        "config.go",
+        "helpers.go",
+        "import_tracker.go",
+        "issue.go",
+        "resolve.go",
+        "rule.go",
+    ],
+    importpath = "github.com/golangci/gosec",
+    visibility = ["//visibility:public"],
+    deps = ["@org_golang_x_tools//go/loader:go_default_library"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = [
+        "analyzer_test.go",
+        "call_list_test.go",
+        "config_test.go",
+        "gosec_suite_test.go",
+        "helpers_test.go",
+        "issue_test.go",
+        "resolve_test.go",
+        "rule_test.go",
+    ],
+    embed = [":go_default_library"],
+    deps = [
+        "//rules:go_default_library",
+        "//testutils:go_default_library",
+        "@com_github_onsi_ginkgo//:go_default_library",
+        "@com_github_onsi_gomega//:go_default_library",
+    ],
+)

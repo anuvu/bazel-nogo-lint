@@ -1,0 +1,65 @@
+OS := $(shell uname -s | tr A-Z a-z)
+BINARY_PREFIX_DIRECTORY := $(OS)_amd64_stripped
+BAZEL=$(HOME)/bin/bazel
+BAZELOPTS= --repository_cache="$$HOME/.bzrepos" \
+					 --test_output=errors 
+
+.PHONY: all
+all: build check
+
+.PHONY: info
+.SILENT: info
+info:
+	${BAZEL} build @io_bazel_rules_go//:go_info
+	cat bazel-bin/external/io_bazel_rules_go/linux_amd64_stripped/go_info%/go_info_report
+
+# FIXME: this will be replaced with bazel rules eventually
+.PHONY: setup-base
+setup-base:
+	go generate ./cmd/...
+
+.PHONY: fmt-bazel
+fmt-bazel:
+	${BAZEL} run //:buildozer
+	${BAZEL} run //:buildifier
+
+# invoke this target when you have added any new directories or files
+.PHONY: update-bazel
+update-bazel:
+	${BAZEL} run //:gazelle
+
+# invoke this target when you have modified go.mod
+.PHONY: update-mod
+update-mod:
+	${BAZEL} run //:gazelle -- update-repos -from_file=go.mod
+
+.PHONY: init
+init: setup-base update-bazel fmt-bazel
+
+.PHONY: build
+build:	
+	${BAZEL} build ${BAZELOPTS} //...
+
+.PHONY: check
+check:
+	${BAZEL} run //:golangcilint
+
+.PHONY: bench
+.SILENT: bench
+bench:
+	for i in $$(${BAZEL} query 'tests(//...)'); do \
+		${BAZEL} run $$i -- -test.bench=.; \
+	done
+
+.PHONY: coverage
+.SILENT: coverage
+coverage:
+	${BAZEL} coverage //...
+	for c in $$(find ./bazel-out/ -name 'coverage.dat'); do \
+		go tool cover --html=$$c -o /tmp/cover.html; \
+		cat /tmp/cover.html | grep 'option value="file' | sed 's/<[^>]*>//g' | sed 's/^[ \t]*//'; \
+	done
+
+.PHONY: clean
+clean:
+	${BAZEL} clean

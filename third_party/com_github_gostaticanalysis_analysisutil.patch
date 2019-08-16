@@ -1,0 +1,32 @@
+--- a/BUILD.bazel	2019-07-19 23:26:49.509479237 -0700
++++ b/BUILD.bazel	2019-07-19 23:39:53.436828003 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library", "go_test")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -17,6 +17,23 @@
+     ],
+ )
+ 
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "call.go",
++        "file.go",
++        "pkg.go",
++        "ssa.go",
++        "types.go",
++    ],
++    importpath = "github.com/gostaticanalysis/analysisutil",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++        "@org_golang_x_tools//go/ssa:go_tool_library",
++    ],
++)
++
+ go_test(
+     name = "go_default_test",
+     srcs = [

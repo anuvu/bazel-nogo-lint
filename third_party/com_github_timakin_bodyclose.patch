@@ -1,0 +1,28 @@
+--- a/passes/bodyclose/BUILD.bazel	2019-07-19 23:31:06.341967941 -0700
++++ b/passes/bodyclose/BUILD.bazel	2019-07-19 23:32:07.817668598 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library", "go_test")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -13,6 +13,19 @@
+     ],
+ )
+ 
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["bodyclose.go"],
++    importpath = "github.com/timakin/bodyclose/passes/bodyclose",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@com_github_gostaticanalysis_analysisutil//:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++        "@org_golang_x_tools//go/analysis/passes/buildssa:go_tool_library",
++        "@org_golang_x_tools//go/ssa:go_tool_library",
++    ],
++)
++
+ go_test(
+     name = "go_default_test",
+     srcs = ["bodyclose_test.go"],

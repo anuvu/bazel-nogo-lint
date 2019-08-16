@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library","go_tool_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["scoring.go"],
+    importpath = "github.com/nbutton23/zxcvbn-go/scoring",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//entropy:go_default_library",
+        "//match:go_default_library",
+        "//utils/math:go_default_library",
+    ],
+)
+
+go_tool_library(
+    name = "go_tool_library",
+    srcs = ["scoring.go"],
+    importpath = "github.com/nbutton23/zxcvbn-go/scoring",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//entropy:go_tool_library",
+        "//match:go_tool_library",
+        "//utils/math:go_tool_library",
+    ],
+)
+

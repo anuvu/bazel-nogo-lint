@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library","go_tool_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "cgo.go",
+        "cgo_pkgconfig.go",
+    ],
+    importpath = "golang.org/x/tools/go/internal/cgo",
+    visibility = ["//go:__subpackages__"],
+)
+go_tool_library(
+    name = "go_tool_library",
+    srcs = [
+        "cgo.go",
+        "cgo_pkgconfig.go",
+    ],
+    importpath = "golang.org/x/tools/go/internal/cgo",
+    visibility = ["//go:__subpackages__"],
+)
+

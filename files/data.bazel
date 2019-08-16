@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library","go_tool_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["bindata.go"],
+    importpath = "github.com/nbutton23/zxcvbn-go/data",
+    visibility = ["//visibility:public"],
+)
+
+go_tool_library(
+    name = "go_tool_library",
+    srcs = ["bindata.go"],
+    importpath = "github.com/nbutton23/zxcvbn-go/data",
+    visibility = ["//visibility:public"],
+)
