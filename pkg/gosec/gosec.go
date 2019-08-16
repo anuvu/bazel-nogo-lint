@@ -54,7 +54,6 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		text := fmt.Sprintf("%s: %s", i.RuleID, i.What) // TODO: use severity and confidence
 		var r *result.Range
 		line, err := strconv.Atoi(i.Line)
-		fmt.Println(line)
 		if err != nil {
 			r = &result.Range{}
 			if n, rerr := fmt.Sscanf(i.Line, "%d-%d", &r.From, &r.To); rerr != nil || n != 2 {

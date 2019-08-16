@@ -1,2 +1,3 @@
-/files
+/files/*
 test.patch
+bazel-*

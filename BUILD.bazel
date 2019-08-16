@@ -8,15 +8,8 @@
 # gazelle:proto disable_global
 
 load("@bazel_gazelle//:def.bzl", "gazelle")
-load("@io_bazel_rules_go//go:def.bzl", "go_library","nogo")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
-nogo(
-    name = "nogo",
-    visibility = ["//visibility:public"],
-    deps = [
-       "//pkg/gosec:gosec",
-    ],
-)
 
 gazelle(
     name = "gazelle",

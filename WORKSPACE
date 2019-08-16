@@ -5,9 +5,10 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 go_rules_version = "0.19.1"
 
-local_repository(
+git_repository(
     name = "io_bazel_rules_go",
-    path = "../rules_go",
+    remote =  "https://aci-github.cisco.com/shimish2/rules_go.git",
+    commit = "ac5f421a63039c8cf4274099b42f5755057699ab",
 )
 
 gazelle_version = "0.18.1"
