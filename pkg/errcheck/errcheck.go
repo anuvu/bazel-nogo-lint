@@ -70,7 +70,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	}
 
 	for _, i := range issues {
-		pass.Reportf(token.Pos(i.Pos.Offset), "Error return value of %s is not checked", util.FormatCode(i.FuncName))
+		pass.Reportf(token.Pos(i.Pos.Offset), "[%s] Error return value of %s is not checked", Name, util.FormatCode(i.FuncName))
 	}
 
 	return nil, nil

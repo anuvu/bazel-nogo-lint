@@ -46,5 +46,6 @@ nogo(
         "//pkg/gosec:gosec",
 	"//pkg/deadcode:deadcode",
 	"//pkg/gochecknoglobals:gochecknoglobals",
+        "//pkg/errcheck:errcheck",
         ],
     )

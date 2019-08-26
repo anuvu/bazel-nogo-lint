@@ -1,0 +1,22 @@
+--- a/BUILD.bazel	2019-08-26 16:01:28.948901760 -0700
++++ b/BUILD.bazel	2019-08-26 16:02:22.168899980 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -21,3 +21,13 @@
+     ],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "errors.go",
++        "stack.go",
++    ],
++    importpath = "github.com/pkg/errors",
++    visibility = ["//visibility:public"],
++)

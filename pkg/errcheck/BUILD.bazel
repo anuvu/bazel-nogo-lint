@@ -1,18 +1,18 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 
-go_library(
-    name = "go_default_library",
+go_tool_library(
+    name = "errcheck",
     srcs = ["errcheck.go"],
     importpath = "golang.cisco.com/golinters/pkg/errcheck",
     visibility = ["//visibility:public"],
     deps = [
-        "//pkg/config:go_default_library",
-        "//pkg/fsutils:go_default_library",
-        "//pkg/result:go_default_library",
-        "//pkg/util:go_default_library",
-        "@com_github_golangci_errcheck//golangci:go_default_library",
-        "@com_github_pkg_errors//:go_default_library",
-        "@org_golang_x_tools//go/analysis:go_default_library",
-        "@org_golang_x_tools//go/loader:go_default_library",
+        "//pkg/config:go_tool_library",
+        "//pkg/fsutils:go_tool_library",
+        "//pkg/result:go_tool_library",
+        "//pkg/util:go_tool_library",
+        "@com_github_golangci_errcheck//golangci:go_tool_library",
+        "@com_github_pkg_errors//:go_tool_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@org_golang_x_tools//go/loader:go_tool_library",
     ],
 )

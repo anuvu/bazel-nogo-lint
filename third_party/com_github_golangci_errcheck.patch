@@ -1,0 +1,43 @@
+--- a/golangci/BUILD.bazel	2019-08-26 15:46:45.788931308 -0700
++++ b/golangci/BUILD.bazel	2019-08-26 15:48:05.418928644 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -10,3 +10,14 @@
+         "@org_golang_x_tools//go/loader:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["golangci.go"],
++    importpath = "github.com/golangci/errcheck/golangci",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//internal/errcheck:go_tool_library",
++        "@org_golang_x_tools//go/loader:go_tool_library",
++    ],
++)
+--- a/internal/errcheck/BUILD.bazel	2019-08-26 15:55:52.665913011 -0700
++++ b/internal/errcheck/BUILD.bazel	2019-08-26 15:57:13.631910302 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -13,3 +13,11 @@
+     srcs = ["errcheck_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["errcheck.go"],
++    importpath = "github.com/golangci/errcheck/internal/errcheck",
++    visibility = ["//:__subpackages__"],
++    deps = ["@org_golang_x_tools//go/loader:go_tool_library"],
++)
