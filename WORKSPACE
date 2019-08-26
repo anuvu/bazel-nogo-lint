@@ -122,6 +122,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20180628070357-927a3d87b613",
+    patches=["//:third_party/com_github_golangci_go_misc.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(

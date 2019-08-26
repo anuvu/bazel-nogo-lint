@@ -1,0 +1,20 @@
+--- a/deadcode/BUILD.bazel	2019-08-26 14:59:19.224676313 -0700
++++ b/deadcode/BUILD.bazel	2019-08-26 15:00:27.888674140 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -13,3 +13,11 @@
+     srcs = ["deadcode_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["deadcode.go"],
++    importpath = "github.com/golangci/go-misc/deadcode",
++    visibility = ["//visibility:public"],
++    deps = ["@org_golang_x_tools//go/loader:go_tool_library"],
++)

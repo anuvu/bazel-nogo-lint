@@ -29,6 +29,18 @@
       "/external/": "no need to vet third party code"
     }
   },
+  "deadcode": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "gochecknoglobals": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
   "gosec": {
     "exclude_files": {
       "/vendor/": "no need to vet third party code",
