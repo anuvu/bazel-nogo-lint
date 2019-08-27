@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library","go_tool_library")
+
+go_tool_library(
+     name = "go_tool_library",
+    srcs = ["util.go"],
+    importpath = "golang.cisco.com/golinters/pkg/util",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@org_golang_x_tools//go/loader:go_tool_library",
+        "@org_golang_x_tools//go/packages:go_tool_library",
+        "@org_golang_x_tools//go/ssa:go_tool_library",
+        "@org_golang_x_tools//go/ssa/ssautil:go_tool_library",
+    ],
+)
+
+go_library(
+     name = "go_default_library",
+    srcs = ["util.go"],
+    importpath = "golang.cisco.com/golinters/pkg/util",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_x_tools//go/analysis:go_default_library",
+        "@org_golang_x_tools//go/loader:go_default_library",
+        "@org_golang_x_tools//go/packages:go_default_library",
+        "@org_golang_x_tools//go/ssa:go_default_library",
+        "@org_golang_x_tools//go/ssa/ssautil:go_default_library",
+    ],
+)

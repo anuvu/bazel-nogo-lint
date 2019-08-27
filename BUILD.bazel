@@ -1,0 +1,50 @@
+# Disable build files generation for these directories
+# gazelle:exclude vendor/github.com/bazelbuild/buildtools/buildifier2
+# gazelle:exclude vendor/golang.org/x/tools/cmd/fiximports/testdata
+# gazelle:exclude vendor/golang.org/x/tools/go/gcimporter15/testdata
+# gazelle:exclude vendor/golang.org/x/tools/go/internal/gccgoimporter/testdata
+# gazelle:exclude vendor/golang.org/x/tools/go/loader/testdata
+# gazelle:exclude vendor/golang.org/x/tools/go/internal/gcimporter/testdata
+# gazelle:proto disable_global
+
+load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "nogo")
+
+
+gazelle(
+    name = "gazelle",
+    external = "external",
+    extra_args = ["--exclude=vendor"],
+    gazelle = "@bazel_gazelle//cmd/gazelle:gazelle_pure",
+    prefix = "golang.cisco.com/golinters",
+)
+
+gazelle(
+    name = "gazelle_fix",
+    command = "fix",
+    external = "external",
+    extra_args = ["--exclude=vendor"],
+    gazelle = "@bazel_gazelle//cmd/gazelle:gazelle_pure",
+    prefix = "golang.cisco.com/golinters",
+)
+
+go_library(
+    name = "go_default_library",
+    srcs = ["golinter.go"],
+    importpath = "golang.cisco.com/golinters",
+    visibility = ["//visibility:public"],
+)
+
+nogo(
+    name = "nogo",
+    config = ".bazel/nogo-config.json",
+    vet = True,
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/bodyclose:bodyclose",
+        "//pkg/gosec:gosec",
+	"//pkg/deadcode:deadcode",
+	"//pkg/gochecknoglobals:gochecknoglobals",
+        ],
+    )

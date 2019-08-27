@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl","go_tool_library")
+
+go_tool_library(
+    name = "gosec",
+    srcs = ["gosec.go"],
+    importpath = "golang.cisco.com/golinters/pkg/gosec",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/result:go_tool_library",
+        "//pkg/util:go_tool_library",
+        "@com_github_golangci_gosec//:go_tool_library",
+        "@com_github_golangci_gosec//rules:go_tool_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@org_golang_x_tools//go/loader:go_tool_library",
+    ],
+)

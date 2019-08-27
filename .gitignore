@@ -1,0 +1,4 @@
+/files/*
+test.patch
+bazel-*
+.vscode

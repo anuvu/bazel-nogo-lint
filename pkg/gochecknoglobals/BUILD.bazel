@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+
+go_tool_library(
+    name = "gochecknoglobals",
+    srcs = ["gochecknoglobals.go"],
+    importpath = "golang.cisco.com/golinters/pkg/gochecknoglobals",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/util:go_tool_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+    ],
+)

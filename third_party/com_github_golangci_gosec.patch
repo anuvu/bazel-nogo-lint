@@ -1,0 +1,81 @@
+--- a/BUILD.bazel	2019-07-19 16:01:34.505237231 -0700
++++ b/BUILD.bazel	2019-07-19 22:29:58.951521123 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -17,6 +17,23 @@ go_library(
+     deps = ["@org_golang_x_tools//go/loader:go_default_library"],
+ )
+ 
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "analyzer.go",
++        "call_list.go",
++        "config.go",
++        "helpers.go",
++        "import_tracker.go",
++        "issue.go",
++        "resolve.go",
++        "rule.go",
++    ],
++    importpath = "github.com/golangci/gosec",
++    visibility = ["//visibility:public"],
++    deps = ["@org_golang_x_tools//go/loader:go_tool_library"],
++)
++
+ go_test(
+     name = "go_default_test",
+     srcs = [
+
+--- a/rules/BUILD.bazel
++++ b/rules_BUILD.bazel
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test","go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -33,6 +33,39 @@ go_library(
+     ],
+ )
+ 
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "archive.go",
++        "big.go",
++        "bind.go",
++        "blacklist.go",
++        "errors.go",
++        "fileperms.go",
++        "hardcoded_credentials.go",
++        "rand.go",
++        "readfile.go",
++        "rsa.go",
++        "rulelist.go",
++        "sql.go",
++        "ssh.go",
++        "ssrf.go",
++        "subproc.go",
++        "tempfiles.go",
++        "templates.go",
++        "tls.go",
++        "tls_config.go",
++        "unsafe.go",
++        "weakcrypto.go",
++    ],
++    importpath = "github.com/golangci/gosec/rules",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//:go_tool_library",
++        "@com_github_nbutton23_zxcvbn_go//:go_tool_library",
++    ],
++)
++
+ go_test(
+     name = "go_default_test",
+     srcs = [
