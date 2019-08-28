@@ -34,7 +34,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					if isWhitelisted(vn) {
 						continue
 					}
-					pass.Reportf(vn.NamePos, "%s is a global variable", util.FormatCode(vn.Name))
+					pass.Reportf(vn.NamePos, "[%s] %s is a global variable", Name, util.FormatCode(vn.Name))
 				}
 			}
 		}

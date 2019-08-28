@@ -9,6 +9,7 @@
 
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "nogo")
 
 
 gazelle(
@@ -34,3 +35,16 @@ go_library(
     importpath = "golang.cisco.com/golinters",
     visibility = ["//visibility:public"],
 )
+
+nogo(
+    name = "nogo",
+    config = ".bazel/nogo-config.json",
+    vet = True,
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/bodyclose:bodyclose",
+        "//pkg/gosec:gosec",
+	"//pkg/deadcode:deadcode",
+	"//pkg/gochecknoglobals:gochecknoglobals",
+        ],
+    )

@@ -6,6 +6,9 @@ import (
 	"net/http"
 )
 
+//gochecknoglobals
+var g int = 21
+
 func main() {
 	htt := "https"
 	url := "google"
@@ -14,5 +17,9 @@ func main() {
 	fmt.Println(resp)
 	h := md5.New()
 	fmt.Println(h)
+}
 
+
+//deadcode
+func a(){
 }
