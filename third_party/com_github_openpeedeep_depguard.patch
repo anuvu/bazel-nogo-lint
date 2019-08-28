@@ -1,0 +1,26 @@
+--- a/BUILD.bazel.orig	2019-08-26 15:01:07.116032971 -0700
++++ b/BUILD.bazel	2019-08-26 15:09:12.905243162 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -13,3 +13,17 @@
+         "@org_golang_x_tools//go/loader:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "depguard.go",
++        "rootchecker.go",
++    ],
++    importpath = "github.com/OpenPeeDeeP/depguard",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@com_github_gobwas_glob//:go_tool_library",
++        "@org_golang_x_tools//go/loader:go_tool_library",
++    ],
++)

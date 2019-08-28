@@ -44,8 +44,14 @@ nogo(
     deps = [
         "//pkg/bodyclose:bodyclose",
         "//pkg/gosec:gosec",
-	"//pkg/deadcode:deadcode",
-	"//pkg/gochecknoglobals:gochecknoglobals",
+        "//pkg/deadcode:deadcode",
+        "//pkg/gochecknoglobals:gochecknoglobals",
         "//pkg/errcheck:errcheck",
+        "//pkg/depguard:depguard",
+        "//pkg/goconst:goconst",
+        "//pkg/maligned:maligned",
+        "//pkg/structcheck:structcheck",
+#        "//pkg/unparam:unparam",
+        "//pkg/varcheck:varcheck",
         ],
-    )
+)

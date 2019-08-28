@@ -45,7 +45,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	}
 
 	for _, i := range goconstIssues {
-		textBegin := fmt.Sprintf("string %s has %d occurrences", util.FormatCode(i.Str), i.OccurencesCount)
+		textBegin := fmt.Sprintf("[%s] string %s has %d occurrences", Name, util.FormatCode(i.Str), i.OccurencesCount)
 		var textEnd string
 		if i.MatchingConst == "" {
 			textEnd = ", make it a constant"

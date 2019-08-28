@@ -45,7 +45,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	}
 
 	for _, i := range issues {
-		pass.Reportf(token.Pos(i.Pos.Offset), "%s is unused", util.FormatCode(i.FieldName))
+		pass.Reportf(token.Pos(i.Pos.Offset), "[%s] %s is unused", Name, util.FormatCode(i.FieldName))
 	}
 
 	return nil, nil

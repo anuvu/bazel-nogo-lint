@@ -45,7 +45,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		return nil, nil
 	}
 	for _, i := range issues {
-		text := fmt.Sprintf("struct of size %d bytes could be of size %d bytes", i.OldSize, i.NewSize)
+		text := fmt.Sprintf("[%s] struct of size %d bytes could be of size %d bytes", Name, i.OldSize, i.NewSize)
 		if maligned.SuggestNewOrder {
 			text += fmt.Sprintf(":\n%s", util.FormatCode(i.NewStructDef))
 		}

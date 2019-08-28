@@ -1,7 +1,7 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
 
-go_library(
-    name = "go_default_library",
+go_tool_library(
+    name = "fsutils",
     srcs = ["fsutils.go"],
     importpath = "golang.cisco.com/golinters/pkg/fsutils",
     visibility = ["//visibility:public"],

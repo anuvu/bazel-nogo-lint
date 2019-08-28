@@ -1,0 +1,24 @@
+--- a/check/BUILD.bazel	2019-08-29 11:42:19.100670603 -0700
++++ b/check/BUILD.bazel	2019-08-29 11:42:55.741360261 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -11,3 +11,15 @@
+         "@org_golang_x_tools//go/ssa/ssautil:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["check.go"],
++    importpath = "mvdan.cc/unparam/check",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@org_golang_x_tools//go/packages:go_tool_library",
++        "@org_golang_x_tools//go/ssa:go_tool_library",
++        "@org_golang_x_tools//go/ssa/ssautil:go_tool_library",
++    ],
++)
