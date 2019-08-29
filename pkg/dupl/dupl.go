@@ -43,7 +43,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			return nil, err
 		}
 		dupl := fmt.Sprintf("%s:%d-%d", toFilename, i.To.LineStart(), i.To.LineEnd())
-		pass.Reportf(token.Pos(i.From.LineStart()), "%d-%d lines are duplicate of %s", i.From.LineStart(), i.From.LineEnd(), util.FormatCode(dupl))
+		pass.Reportf(token.Pos(i.From.LineStart()), "[%s] %d-%d lines are duplicate of %s", Name, i.From.LineStart(), i.From.LineEnd(), util.FormatCode(dupl))
 	}
 	return nil, nil
 }

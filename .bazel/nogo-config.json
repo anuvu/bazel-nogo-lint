@@ -47,6 +47,12 @@
       "/external/": "no need to vet third party code"
     }
   },
+  "dupl": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
   "errcheck": {
     "exclude_files": {
       "/vendor/": "no need to vet third party code",
