@@ -9,6 +9,10 @@ import (
 //gochecknoglobals
 var g int = 21
 
+func init() {
+	g = 0
+}
+
 func main() {
 	htt := "https"
 	htt1 := "https"

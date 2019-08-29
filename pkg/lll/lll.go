@@ -12,7 +12,7 @@ import (
 	"golang.org/x/tools/go/analysis"
 )
 
-const Name = "LLL"
+const Name = "lll"
 
 var Analyzer = &analysis.Analyzer{
 	Name: Name,
