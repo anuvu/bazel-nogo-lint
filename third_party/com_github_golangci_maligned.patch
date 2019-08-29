@@ -1,0 +1,20 @@
+--- a/BUILD.bazel	2019-08-29 11:39:26.406573625 -0700
++++ b/BUILD.bazel	2019-08-29 11:40:00.793380614 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,11 @@
+     visibility = ["//visibility:public"],
+     deps = ["@org_golang_x_tools//go/loader:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["maligned.go"],
++    importpath = "github.com/golangci/maligned",
++    visibility = ["//visibility:public"],
++    deps = ["@org_golang_x_tools//go/loader:go_tool_library"],
++)

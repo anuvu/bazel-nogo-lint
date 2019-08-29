@@ -1,0 +1,199 @@
+--- a/BUILD.bazel	2019-08-26 15:29:18.400276592 -0700
++++ b/BUILD.bazel	2019-08-26 15:30:23.169858492 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -16,3 +16,14 @@
+     srcs = ["glob_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["glob.go"],
++    importpath = "github.com/gobwas/glob",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//compiler:go_tool_library",
++        "//syntax:go_tool_library",
++    ],
++)
+--- a/compiler/BUILD.bazel	2019-08-26 15:34:31.936654922 -0700
++++ b/compiler/BUILD.bazel	2019-08-26 15:39:20.570832682 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -22,3 +22,15 @@
+         "//syntax/ast:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["compiler.go"],
++    importpath = "github.com/gobwas/glob/compiler",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//match:go_tool_library",
++        "//syntax/ast:go_tool_library",
++        "//util/runes:go_tool_library",
++    ],
++)
+--- a/match/BUILD.bazel	2019-08-26 15:41:28.995340337 -0700
++++ b/match/BUILD.bazel	2019-08-26 15:46:46.371939605 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -60,3 +60,36 @@
+     ],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "any.go",
++        "any_of.go",
++        "btree.go",
++        "contains.go",
++        "every_of.go",
++        "list.go",
++        "match.go",
++        "max.go",
++        "min.go",
++        "nothing.go",
++        "prefix.go",
++        "prefix_any.go",
++        "prefix_suffix.go",
++        "range.go",
++        "row.go",
++        "segments.go",
++        "single.go",
++        "suffix.go",
++        "suffix_any.go",
++        "super.go",
++        "text.go",
++    ],
++    importpath = "github.com/gobwas/glob/match",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//util/runes:go_tool_library",
++        "//util/strings:go_tool_library",
++    ],
++)
+--- a/util/runes/BUILD.bazel	2019-08-26 15:54:24.955699956 -0700
++++ b/util/runes/BUILD.bazel	2019-08-26 15:55:02.224940742 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -12,3 +12,10 @@
+     srcs = ["runes_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["runes.go"],
++    importpath = "github.com/gobwas/glob/util/runes",
++    visibility = ["//visibility:public"],
++)
+--- a/util/strings/BUILD.bazel	2019-08-26 15:55:49.967168531 -0700
++++ b/util/strings/BUILD.bazel	2019-08-26 15:58:27.892784541 -0700
+@@ -1,8 +1,15 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = ["strings.go"],
+     importpath = "github.com/gobwas/glob/util/strings",
+     visibility = ["//visibility:public"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["strings.go"],
++    importpath = "github.com/gobwas/glob/util/strings",
++    visibility = ["//visibility:public"],
+ )
+--- a/syntax/ast/BUILD.bazel	2019-08-26 15:59:20.741342239 -0700
++++ b/syntax/ast/BUILD.bazel	2019-08-26 16:03:02.340682607 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -17,3 +17,14 @@
+     embed = [":go_default_library"],
+     deps = ["//syntax/lexer:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "ast.go",
++        "parser.go",
++    ],
++    importpath = "github.com/gobwas/glob/syntax/ast",
++    visibility = ["//visibility:public"],
++    deps = ["//syntax/lexer:go_tool_library"],
++)
+--- a/syntax/lexer/BUILD.bazel	2019-08-26 16:05:26.345601756 -0700
++++ b/syntax/lexer/BUILD.bazel	2019-08-26 16:11:30.173144614 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -16,3 +16,14 @@
+     srcs = ["lexer_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "lexer.go",
++        "token.go",
++    ],
++    importpath = "github.com/gobwas/glob/syntax/lexer",
++    visibility = ["//visibility:public"],
++    deps = ["//util/runes:go_tool_library"],
++)
+--- a/syntax/BUILD.bazel.orig	2019-08-26 16:12:32.278500628 -0700
++++ b/syntax/BUILD.bazel	2019-08-26 16:13:04.929316458 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -10,3 +10,14 @@
+         "//syntax/lexer:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["syntax.go"],
++    importpath = "github.com/gobwas/glob/syntax",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//syntax/ast:go_tool_library",
++        "//syntax/lexer:go_tool_library",
++    ],
++)

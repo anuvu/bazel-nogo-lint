@@ -58,6 +58,8 @@ go_repository(
     build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20190124213536-fbb59629db34",
+    patches=["//:third_party/cc_mvdan_unparam.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -85,6 +87,8 @@ go_repository(
     build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.2.3",
+    patches=["//:third_party/com_github_gobwas_glob.patch"],
+    patch_args = ["-p1"],
 )
 
 
@@ -95,6 +99,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20180506172741-cfe4005ccda2",
+    patches=["//:third_party/com_github_golangci_check.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -104,6 +110,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20180902072040-3e9179ac440a",
+    patches=["//:third_party/com_github_golangci_dupl.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -169,6 +177,8 @@ go_repository(
     importpath = "github.com/golangci/lint-1",
     sum = "h1:r7vyX+SN24x6+5AnpnrRn/bdwBb7U+McZqCHOVtXDuk=",
     version = "v0.0.0-20180610141402-ee948d087217",
+    patches=["//:third_party/com_github_golangci_lint_1.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -176,6 +186,8 @@ go_repository(
     importpath = "github.com/golangci/maligned",
     sum = "h1:kNY3/svz5T29MYHubXix4aDDuE3RWHkPvopM/EDv/MA=",
     version = "v0.0.0-20180506175553-b1d89398deca",
+    patches=["//:third_party/com_github_golangci_maligned.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -185,6 +197,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20180809174111-950f5d19e770",
+    patches=["//:third_party/com_github_golangci_misspell.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -194,6 +208,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20180630174525-215b22d4de21",
+    patches=["//:third_party/com_github_golangci_prealloc.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -301,6 +317,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v1.0.0",
+    patches=["//:third_party/com_github_openpeedeep_depguard.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(

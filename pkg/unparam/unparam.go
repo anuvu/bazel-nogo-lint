@@ -1,6 +1,8 @@
 package unparam
 
 import (
+	"fmt"
+
 	"mvdan.cc/unparam/check"
 
 	"golang.org/x/tools/go/analysis"
@@ -9,7 +11,7 @@ import (
 
 type Unparam struct{}
 
-const Name = "depguard"
+const Name = "unparam"
 
 var Analyzer = &analysis.Analyzer{
 	Name: Name,
@@ -50,7 +52,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 
 	for _, i := range unparamIssues {
 
-		pass.Reportf(i.Pos(), i.Message())
+		pass.Reportf(i.Pos(), fmt.Sprintf("[%s] %s", Name, i.Message()))
 	}
 
 	return nil, nil

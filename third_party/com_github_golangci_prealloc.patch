@@ -1,0 +1,22 @@
+--- a/BUILD.bazel	2019-08-26 16:23:20.078119656 -0700
++++ b/BUILD.bazel	2019-08-26 16:23:47.052444327 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -15,3 +15,13 @@
+     srcs = ["prealloc_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "import.go",
++        "prealloc.go",
++    ],
++    importpath = "github.com/golangci/prealloc",
++    visibility = ["//visibility:public"],
++)

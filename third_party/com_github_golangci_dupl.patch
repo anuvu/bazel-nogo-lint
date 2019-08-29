@@ -1,0 +1,138 @@
+--- a/BUILD.bazel.orig	2019-08-28 14:44:09.394430864 -0700
++++ b/BUILD.bazel	2019-08-28 14:44:57.296600102 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -11,3 +11,15 @@
+         "//syntax:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["main.go"],
++    importpath = "github.com/golangci/dupl",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//job:go_tool_library",
++        "//printer:go_tool_library",
++        "//syntax:go_tool_library",
++    ],
++)
+--- a/job/BUILD.bazel	2019-08-29 11:19:44.533942713 -0700
++++ b/job/BUILD.bazel	2019-08-29 11:20:23.885055451 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -14,3 +14,18 @@
+         "//syntax/golang:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "buildtree.go",
++        "parse.go",
++    ],
++    importpath = "github.com/golangci/dupl/job",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//suffixtree:go_tool_library",
++        "//syntax:go_tool_library",
++        "//syntax/golang:go_tool_library",
++    ],
++)
+--- a/suffixtree/BUILD.bazel	2019-08-29 11:32:46.254717416 -0700
++++ b/suffixtree/BUILD.bazel	2019-08-29 11:33:22.884834388 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -18,3 +18,13 @@
+     ],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "dupl.go",
++        "suffixtree.go",
++    ],
++    importpath = "github.com/golangci/dupl/suffixtree",
++    visibility = ["//visibility:public"],
++)
+--- a/syntax/BUILD.bazel	2019-08-29 11:34:28.290167774 -0700
++++ b/syntax/BUILD.bazel	2019-08-29 11:35:07.825395025 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -13,3 +13,11 @@
+     srcs = ["syntax_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["syntax.go"],
++    importpath = "github.com/golangci/dupl/syntax",
++    visibility = ["//visibility:public"],
++    deps = ["//suffixtree:go_tool_library"],
++)
+--- a/syntax/golang/BUILD.bazel	2019-08-29 11:35:53.801148014 -0700
++++ b/syntax/golang/BUILD.bazel	2019-08-29 11:36:23.431566738 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,11 @@
+     visibility = ["//visibility:public"],
+     deps = ["//syntax:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["golang.go"],
++    importpath = "github.com/golangci/dupl/syntax/golang",
++    visibility = ["//visibility:public"],
++    deps = ["//syntax:go_tool_library"],
++)
+--- a/printer/BUILD.bazel	2019-08-29 11:37:08.207221763 -0700
++++ b/printer/BUILD.bazel	2019-08-29 11:37:39.581065501 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -18,3 +18,16 @@
+     srcs = ["html_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "html.go",
++        "plumbing.go",
++        "printer.go",
++        "text.go",
++    ],
++    importpath = "github.com/golangci/dupl/printer",
++    visibility = ["//visibility:public"],
++    deps = ["//syntax:go_tool_library"],
++)

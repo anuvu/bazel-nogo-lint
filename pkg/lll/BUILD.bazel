@@ -1,15 +1,13 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 
 go_tool_library(
-    name = "goconst",
-    srcs = ["goconst.go"],
-    importpath = "golang.cisco.com/golinters/pkg/goconst",
+    name = "go_tool_library",
+    srcs = ["lll.go"],
+    importpath = "golang.cisco.com/golinters/pkg/lll",
     visibility = ["//visibility:public"],
     deps = [
         "//pkg/config:go_tool_library",
         "//pkg/result:go_tool_library",
-        "//pkg/util:go_tool_library",
-        "@com_github_golangci_goconst//:go_tool_library",
         "@org_golang_x_tools//go/analysis:go_tool_library",
     ],
 )

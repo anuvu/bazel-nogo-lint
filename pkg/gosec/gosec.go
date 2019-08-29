@@ -51,7 +51,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	}
 
 	for _, i := range issues {
-		text := fmt.Sprintf("%s: %s", i.RuleID, i.What) // TODO: use severity and confidence
+		text := fmt.Sprintf("[%s] %s: %s", Name, i.RuleID, i.What) // TODO: use severity and confidence
 		var r *result.Range
 		line, err := strconv.Atoi(i.Line)
 		if err != nil {

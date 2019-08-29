@@ -1,0 +1,40 @@
+--- a/cmd/varcheck/BUILD.bazel	2019-08-29 11:26:56.400028653 -0700
++++ b/cmd/varcheck/BUILD.bazel	2019-08-29 11:27:25.390395131 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,11 @@
+     visibility = ["//visibility:public"],
+     deps = ["@org_golang_x_tools//go/loader:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["varcheck.go"],
++    importpath = "github.com/golangci/check/cmd/varcheck",
++    visibility = ["//visibility:public"],
++    deps = ["@org_golang_x_tools//go/loader:go_tool_library"],
++)
+--- a/cmd/structcheck/BUILD.bazel	2019-08-29 11:46:24.594263537 -0700
++++ b/cmd/structcheck/BUILD.bazel	2019-08-29 11:47:36.108880161 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,11 @@
+     visibility = ["//visibility:public"],
+     deps = ["@org_golang_x_tools//go/loader:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["structcheck.go"],
++    importpath = "github.com/golangci/check/cmd/structcheck",
++    visibility = ["//visibility:public"],
++    deps = ["@org_golang_x_tools//go/loader:go_tool_library"],
++)

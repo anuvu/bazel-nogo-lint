@@ -1,0 +1,29 @@
+--- a/BUILD.bazel.orig	2019-08-28 14:40:12.953386653 -0700
++++ b/BUILD.bazel	2019-08-28 14:40:44.691977611 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -31,3 +31,20 @@
+     ],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "ascii.go",
++        "case.go",
++        "legal.go",
++        "mime.go",
++        "notwords.go",
++        "replace.go",
++        "stringreplacer.go",
++        "url.go",
++        "words.go",
++    ],
++    importpath = "github.com/golangci/misspell",
++    visibility = ["//visibility:public"],
++)
