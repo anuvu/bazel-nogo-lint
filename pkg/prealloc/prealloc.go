@@ -32,7 +32,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	for _, f := range pass.Files {
 		hints := prealloc.Check([]*ast.File{f}, s.Simple, s.RangeLoops, s.ForLoops)
 		for _, hint := range hints {
-			pass.Reportf(token.Pos(hint.Pos), "Consider preallocating %s", util.FormatCode(hint.DeclaredSliceName))
+			pass.Reportf(token.Pos(hint.Pos), "[%s] Consider preallocating %s", Name, util.FormatCode(hint.DeclaredSliceName))
 		}
 	}
 

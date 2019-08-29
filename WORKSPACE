@@ -40,6 +40,8 @@ go_repository(
     build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20180901003855-c20040233aed",
+    patches=["//:third_party/cc_mvdan_interfacer.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -49,6 +51,8 @@ go_repository(
     build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20170908181259-adc824a0674b",
+    patches=["//:third_party/cc_mvdan_lint.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -170,6 +174,8 @@ go_repository(
     importpath = "github.com/golangci/ineffassign",
     sum = "h1:XRFao922N8F3EcIXBSNX8Iywk+GI0dxD/8FicMX2D/c=",
     version = "v0.0.0-20180808204949-42439a7714cc",
+    patches=["//:third_party/com_github_golangci_ineffassign.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -219,6 +225,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20180507085042-28b1c447d1f4",
+    patches=["//:third_party/com_github_golangci_unconvert.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -245,6 +253,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v1.0.0",
+    patches=["//:third_party/com_github_kisielk_gotool.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -381,6 +391,8 @@ go_repository(
     name = "org_golang_x_text",
     importpath = "golang.org/x/text",
     tag = "v0.3.0",
+    patches=["//:third_party/org_golang_x_text.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(

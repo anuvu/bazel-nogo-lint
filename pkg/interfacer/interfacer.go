@@ -1,6 +1,8 @@
 package interfacer
 
 import (
+	"fmt"
+
 	"mvdan.cc/interfacer/check"
 
 	"go/types"
@@ -57,7 +59,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	}
 
 	for _, i := range issues {
-		pass.Reportf(i.Pos(), i.Message())
+		pass.Reportf(i.Pos(), fmt.Sprintf("[%s] %s", Name, i.Message()))
 	}
 
 	return nil, nil

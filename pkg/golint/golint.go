@@ -35,7 +35,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	}
 	for idx := range ps {
 		if ps[idx].Confidence >= golint.MinConfidence {
-			pass.Reportf(token.Pos(ps[idx].Position.Offset), ps[idx].Text)
+			pass.Reportf(token.Pos(ps[idx].Position.Offset), fmt.Sprintf("[%s] %s", Name, ps[idx].Text))
 			// TODO: use p.Link and p.Category
 		}
 	}

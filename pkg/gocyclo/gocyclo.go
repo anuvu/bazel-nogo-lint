@@ -36,7 +36,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			break // Break as the stats is already sorted from greatest to least
 		}
 
-		pass.Reportf(token.Pos(s.Pos.Offset), "cyclomatic complexity %d of func %s is high (> %d)", s.Complexity, util.FormatCode(s.FuncName), MinComplexity)
+		pass.Reportf(token.Pos(s.Pos.Offset), "[%s] cyclomatic complexity %d of func %s is high (> %d)", Name, s.Complexity, util.FormatCode(s.FuncName), MinComplexity)
 	}
 
 	return nil, nil

@@ -29,13 +29,19 @@
       "/external/": "no need to vet third party code"
     }
   },
+  "bodyclose": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
   "deadcode": {
     "exclude_files": {
       "/vendor/": "no need to vet third party code",
       "/external/": "no need to vet third party code"
     }
   },
-  "gochecknoglobals": {
+  "depguard": {
     "exclude_files": {
       "/vendor/": "no need to vet third party code",
       "/external/": "no need to vet third party code"
@@ -47,7 +53,109 @@
       "/external/": "no need to vet third party code"
     }
   },
+  "gochecknoglobals": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "gochecknoinits": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "goconst": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "gocritic": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "gocyclo": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "golint": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
   "gosec": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "ineffassign": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "interfacer": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "lll": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "maligned": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "misspell": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "nakedret": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "prealloc": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "structcheck": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "uncovert": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "unparam": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "varcheck": {
     "exclude_files": {
       "/vendor/": "no need to vet third party code",
       "/external/": "no need to vet third party code"

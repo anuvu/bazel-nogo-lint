@@ -1,0 +1,50 @@
+--- a/BUILD.bazel	2019-08-29 14:53:11.115359326 -0700
++++ b/BUILD.bazel	2019-08-29 15:14:31.629370716 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -20,3 +20,18 @@
+     srcs = ["match18_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "go13.go",
++        "go14-15.go",
++        "go16-18.go",
++        "match.go",
++        "match18.go",
++        "tool.go",
++    ],
++    importpath = "github.com/kisielk/gotool",
++    visibility = ["//visibility:public"],
++    deps = ["//internal/load:go_tool_library"],
++)
+--- a/internal/load/BUILD.bazel	2019-08-29 15:16:36.335553082 -0700
++++ b/internal/load/BUILD.bazel	2019-08-29 15:17:09.552087852 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -16,3 +16,14 @@
+     srcs = ["match_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "path.go",
++        "pkg.go",
++        "search.go",
++    ],
++    importpath = "github.com/kisielk/gotool/internal/load",
++    visibility = ["//:__subpackages__"],
++)

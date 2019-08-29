@@ -1,16 +1,16 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 
-go_library(
-    name = "go_default_library",
+go_tool_library(
+    name = "interfacer",
     srcs = ["interfacer.go"],
     importpath = "golang.cisco.com/golinters/pkg/interfacer",
     visibility = ["//visibility:public"],
     deps = [
-        "//pkg/result:go_default_library",
-        "//pkg/util:go_default_library",
-        "@cc_mvdan_interfacer//check:go_default_library",
-        "@org_golang_x_tools//go/analysis:go_default_library",
-        "@org_golang_x_tools//go/loader:go_default_library",
-        "@org_golang_x_tools//go/packages:go_default_library",
+        "//pkg/result:go_tool_library",
+        "//pkg/util:go_tool_library",
+        "@cc_mvdan_interfacer//check:go_tool_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@org_golang_x_tools//go/loader:go_tool_library",
+        "@org_golang_x_tools//go/packages:go_tool_library",
     ],
 )

@@ -6,15 +6,30 @@ import (
 	"net/http"
 )
 
+func ReturnId() (id int, err error) {
+	mySlice := make([]struct{}, 5)
+	for i := 0; i != 5; i++ {
+		mySlice = append(mySlice, struct{}{})
+	}
+	id = 10
+	return
+}
+
 //gochecknoglobals
 var g int = 21
 
+var s = ""
+
 func init() {
 	g = 0
+
+	s = "receved this is a very very very very very very very very very long long long long long line line line line line line but can get longer"
+
 }
 
 func main() {
-	htt := "https"
+	htt := "http"
+	htt = "https"
 	htt1 := "https"
 	htt2 := "https"
 	htt3 := "https"

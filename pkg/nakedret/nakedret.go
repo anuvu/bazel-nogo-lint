@@ -97,7 +97,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		}
 		ast.Walk(&v, f)
 		for _, issue := range v.issues {
-			pass.Reportf(issue.IPos, issue.Text)
+			pass.Reportf(issue.IPos, fmt.Sprintf("[%s] %s", Name, issue.Text))
 		}
 	}
 	return nil, nil

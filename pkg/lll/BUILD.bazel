@@ -1,7 +1,7 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 
 go_tool_library(
-    name = "go_tool_library",
+    name = "lll",
     srcs = ["lll.go"],
     importpath = "golang.cisco.com/golinters/pkg/lll",
     visibility = ["//visibility:public"],
