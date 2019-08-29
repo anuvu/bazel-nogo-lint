@@ -113,6 +113,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20181003203344-ef45e06d44b6",
+    patches=["//:third_party/com_github_golangci_errcheck.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -133,6 +135,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.0.0-20180610141641-041c5f2b40f3",
+    patches=["//:third_party/com_github_golangaci_goconst.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -306,6 +310,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v0.8.0",
+    patches=["//:third_party/com_github_pkg_errors.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
