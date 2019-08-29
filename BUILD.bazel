@@ -53,5 +53,7 @@ nogo(
         "//pkg/structcheck:structcheck",
 #        "//pkg/unparam:unparam",
         "//pkg/varcheck:varcheck",
+#        "//pkg/gocritic:gocritic",
+        "//pkg/gochecknoinits:gochecknoinits",
         ],
 )

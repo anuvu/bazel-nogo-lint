@@ -24,7 +24,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			}
 			name := funcDecl.Name.Name
 			if name == "init" && funcDecl.Recv.NumFields() == 0 {
-				pass.Reportf(funcDecl.Pos(), "don't use %s function", util.FormatCode(name))
+				pass.Reportf(funcDecl.Pos(), "[%s] don't use %s function", Name, util.FormatCode(name))
 			}
 		}
 	}

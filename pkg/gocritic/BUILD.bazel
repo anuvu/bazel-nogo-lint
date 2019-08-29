@@ -1,7 +1,7 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 
-go_library(
-    name = "go_default_library",
+go_tool_library(
+    name = "gocritic",
     srcs = ["gocritic.go"],
     importpath = "golang.cisco.com/golinters/pkg/gocritic",
     visibility = ["//visibility:public"],
