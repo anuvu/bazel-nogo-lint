@@ -1,6 +1,7 @@
 package unconvert
 
 import (
+	"fmt"
 	"go/token"
 	"go/types"
 
@@ -40,7 +41,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	}
 
 	for _, pos := range positions {
-		pass.Reportf(token.Pos(pos.Offset), "Unnecessary conversion")
+		pass.Reportf(token.Pos(pos.Offset), fmt.Sprintf("[%s] Unnecessary conversion", Name))
 	}
 	return nil, nil
 }

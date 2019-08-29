@@ -75,7 +75,7 @@ func runOnFile(fileName string, r *misspell.Replacer, pass *analysis.Pass) error
 	// tool uses r.Replace by default.
 	_, diffs := r.Replace(string(fileContent))
 	for _, diff := range diffs {
-		text := fmt.Sprintf("`%s` is a misspelling of `%s`", diff.Original, diff.Corrected)
+		text := fmt.Sprintf("[%s] `%s` is a misspelling of `%s`", Name, diff.Original, diff.Corrected)
 		pass.Reportf(token.Pos(diff.Line), text)
 	}
 	return nil

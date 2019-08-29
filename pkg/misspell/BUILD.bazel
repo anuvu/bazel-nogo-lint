@@ -1,7 +1,7 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 
 go_tool_library(
-    name = "go_tool_library",
+    name = "misspell",
     srcs = ["misspell.go"],
     importpath = "golang.cisco.com/golinters/pkg/misspell",
     visibility = ["//visibility:public"],

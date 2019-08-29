@@ -23,7 +23,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		return nil, nil
 	}
 	for _, i := range issues {
-		pass.Reportf(token.Pos(i.Pos.Offset), "ineffectual assignment to %s", util.FormatCode(i.IdentName))
+		pass.Reportf(token.Pos(i.Pos.Offset), "[%s] ineffectual assignment to %s", Name, util.FormatCode(i.IdentName))
 	}
 	return nil, nil
 }

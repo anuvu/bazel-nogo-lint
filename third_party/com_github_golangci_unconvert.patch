@@ -1,0 +1,24 @@
+--- a/BUILD.bazel	2019-08-29 15:50:45.020293902 -0700
++++ b/BUILD.bazel	2019-08-29 15:51:44.948695983 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -11,3 +11,15 @@
+         "@org_golang_x_tools//go/loader:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["unconvert.go"],
++    importpath = "github.com/golangci/unconvert",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@com_github_kisielk_gotool//:go_tool_library",
++        "@org_golang_x_text//width:go_tool_library",
++        "@org_golang_x_tools//go/loader:go_tool_library",
++    ],
++)

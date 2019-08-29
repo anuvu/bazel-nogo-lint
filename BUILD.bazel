@@ -43,17 +43,56 @@ nogo(
     visibility = ["//visibility:public"],
     deps = [
         "//pkg/bodyclose:bodyclose",
-        "//pkg/gosec:gosec",
         "//pkg/deadcode:deadcode",
-        "//pkg/gochecknoglobals:gochecknoglobals",
-        "//pkg/errcheck:errcheck",
         "//pkg/depguard:depguard",
+        "//pkg/errcheck:errcheck",
+        "//pkg/gochecknoglobals:gochecknoglobals",
+        "//pkg/gochecknoinits:gochecknoinits",
         "//pkg/goconst:goconst",
+#        "//pkg/gocritic:gocritic",
+        "//pkg/gocyclo:gocyclo",
+        "//pkg/golint:golint",
+        "//pkg/gosec:gosec",
+        "//pkg/ineffassign:ineffassign",
+#        "//pkg/interfacer:interfacer",
+        "//pkg/lll:lll",
         "//pkg/maligned:maligned",
+        "//pkg/misspell:misspell",
+        "//pkg/nakedret:nakedret",
+        "//pkg/prealloc:prealloc",
         "//pkg/structcheck:structcheck",
+        "//pkg/unconvert:unconvert",
 #        "//pkg/unparam:unparam",
         "//pkg/varcheck:varcheck",
-#        "//pkg/gocritic:gocritic",
-        "//pkg/gochecknoinits:gochecknoinits",
         ],
 )
+
+"""
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 28 11:32 bodyclose
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 config
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 28 14:37 deadcode
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 depguard
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 14:06 dupl
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 11:14 errcheck
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 fsutils
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 14:05 gochecknoglobals
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 14:17 gochecknoinits
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 goconst
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 14:17 gocritic
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 28 11:32 gocyclo
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 golint
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 gosec
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 28 11:32 ineffassign
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 28 11:32 interfacer
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 14:17 lll
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 maligned
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 misspell
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 nakedret
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 prealloc
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 28 11:32 result
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 structcheck
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 28 11:32 unconvert
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 unparam
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 28 11:32 util
+drwxrwxr-x 2 rchincha rchincha 4096 Aug 29 12:05 varcheck
+"""
