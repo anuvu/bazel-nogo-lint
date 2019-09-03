@@ -1,0 +1,19 @@
+--- a/BUILD.bazel	2019-09-03 14:54:47.089405321 -0700
++++ b/BUILD.bazel	2019-09-03 14:55:11.977985467 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -16,3 +16,10 @@
+     embed = [":go_default_library"],
+     deps = ["@com_github_go_toolsmith_astequal//:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["strparse.go"],
++    importpath = "github.com/go-toolsmith/strparse",
++    visibility = ["//visibility:public"],
++)

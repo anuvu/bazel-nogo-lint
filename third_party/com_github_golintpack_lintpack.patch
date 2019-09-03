@@ -1,0 +1,64 @@
+--- a/BUILD.bazel	2019-08-30 15:35:33.100665960 -0700
++++ b/BUILD.bazel	2019-08-30 15:36:26.329010976 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -12,3 +12,16 @@
+     visibility = ["//visibility:public"],
+     deps = ["@com_github_go_toolsmith_astfmt//:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "checkers_db.go",
++        "context.go",
++        "doc.go",
++        "lintpack.go",
++    ],
++    importpath = "github.com/go-lintpack/lintpack",
++    visibility = ["//visibility:public"],
++    deps = ["@com_github_go_toolsmith_astfmt//:go_tool_library"],
++)
+--- a/astwalk/BUILD.bazel	2019-09-03 15:39:56.134610303 -0700
++++ b/astwalk/BUILD.bazel	2019-09-03 15:40:25.621017918 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -26,3 +26,30 @@
+         "@com_github_go_toolsmith_typep//:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "comment_walker.go",
++        "doc_comment_walker.go",
++        "expr_walker.go",
++        "func_decl_walker.go",
++        "local_comment_walker.go",
++        "local_def_visitor.go",
++        "local_def_walker.go",
++        "local_expr_walker.go",
++        "stmt_list_walker.go",
++        "stmt_walker.go",
++        "type_expr_walker.go",
++        "visitor.go",
++        "walk_handler.go",
++        "walker.go",
++    ],
++    importpath = "github.com/go-lintpack/lintpack/astwalk",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//:go_tool_library",
++        "@com_github_go_toolsmith_astp//:go_tool_library",
++        "@com_github_go_toolsmith_typep//:go_tool_library",
++    ],
++)

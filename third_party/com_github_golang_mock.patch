@@ -1,0 +1,24 @@
+--- a/gomock/BUILD.bazel	2019-09-03 11:41:28.470064627 -0700
++++ b/gomock/BUILD.bazel	2019-09-03 11:44:07.390299114 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -22,3 +22,15 @@
+     embed = [":go_default_library"],
+     deps = ["//gomock/mock_matcher:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "call.go",
++        "callset.go",
++        "controller.go",
++        "matchers.go",
++    ],
++    importpath = "github.com/golang/mock/gomock",
++    visibility = ["//visibility:public"],
++)

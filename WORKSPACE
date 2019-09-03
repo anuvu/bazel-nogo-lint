@@ -440,5 +440,200 @@ go_repository(
     version = "v2.2.1",
 )
 
+go_repository(
+    name = "com_github_golintpack_lintpack",
+    importpath = "github.com/go-lintpack/lintpack",
+    sum = "h1:DI5mA3+eKdWeJ40nU4d6Wc26qmdG8RCi/btYq0TuRN0=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.5.2",
+    patches=["//:third_party/com_github_golintpack_lintpack.patch"],
+    patch_args = ["-p1"],
+)
 
+go_repository(
+    name = "com_github_go_toolsmith_astfmt",
+    importpath = "github.com/go-toolsmith/astfmt",
+    sum = "h1:EIMuvbE9fbtQtimdLe5yeXjuC5CeKbQt8zH6GwtIrhM=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.0-20180903215011-8f8ee99c3086",
+    patches=["//:third_party/com_github_go_toolsmith_astfmt.patch"],
+    patch_args = ["-p1"],
+)
 
+go_repository(
+    name = "com_github_golangci_golangci_lint",
+    importpath = "github.com/golangci/golangci-lint",
+    sum = "h1:lc8Hf9GPCjIr0hg3S/xhvFT1+Hydass8F1xchr8jkME=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.17.1",
+    patches=["//:third_party/com_github_golangci_golangci_lint.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_sirupsen_logrus",
+    importpath = "github.com/sirupsen/logrus",
+    sum = "h1:8c8b5uO0zS4X6RPl/sd1ENwSkIc0/H2PaHxE3udaE8I=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.5",
+    patches=["//:third_party/com_github_sirupsen_logrus.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_fatih_color",
+    importpath = "github.com/fatih/color",
+    sum = "h1:66qjqZk8kalYAvDRtM1AdAJQI0tj4Wrue3Eq3B3pmFU=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.6.0",
+    patches=["//:third_party/com_github_fatih_color.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_mattn_go_colorable",
+    importpath = "github.com/mattn/go-colorable",
+    sum = "h1:UVL0vNpWh04HeJXV0KLcaT7r06gOH2l4OW6ddYRUIY4=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.9",
+    patches=["//:third_party/com_github_mattn_go_colorable.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_golang_mock",
+    importpath = "github.com/golang/mock",
+    sum = "h1:HzcpUG60pfl43n9d2qbdi/3l1uKpAmxlfWEPWtV/QxM=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.0",
+    patches=["//:third_party/com_github_golang_mock.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_mattn_go_isatty",
+    importpath = "github.com/mattn/go-isatty",
+    sum = "h1:ns/ykhmWi7G9O+8a448SecJU3nSMBXJfqQkl0upE1jI=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.3",
+    patches=["//:third_party/com_github_mattn_go_isatty.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "org_golang_x_sys",
+    importpath = "golang.org/x/sys",
+    sum = "h1:pczuHS43Cp2ktBEEmLwScxgjWsBSzdaQiKzUyf3DTTc=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.0-20190312061237-fead79001313",
+    patches=["//:third_party/org_golang_x_sys.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "org_golang_x_crypto",
+    importpath = "golang.org/x/crypto",
+    sum = "h1:YX8ljsm6wXlHZO+aRz9Exqr0evNhKRNe5K/gi+zKh4U=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.0-20190313024323-a1f597ede03a",
+    patches=["//:third_party/org_golang_x_crypto.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_go_critic_go_critic",
+    importpath = "github.com/go-critic/go-critic",
+    sum = "h1:FYaiaLjX0Nqei80KPhm4CyFQUBbmJwSrHxQ73taaGBc=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.3.4",
+    patches=["//:third_party/com_github_go_critic_go_critic.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_go_toolsmith_astcast",
+    importpath = "github.com/go-toolsmith/astcast",
+    sum = "h1:JojxlmI6STnFVG9yOImLeGREv8W2ocNUM+iOhR6jE7g=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.0",
+    patches=["//:third_party/com_github_go_toolsmith_astcast.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_go_toolsmith_astp",
+    importpath = "github.com/go-toolsmith/astp",
+    sum = "h1:alXE75TXgcmupDsMK1fRAy0YUzLzqPVvBKoyWV+KPXg=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.0",
+    patches=["//:third_party/com_github_go_toolsmith_astp.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_go_toolsmith_astcopy",
+    importpath = "github.com/go-toolsmith/astcopy",
+    sum = "h1:OMgl1b1MEpjFQ1m5ztEO06rz5CUd3oBv9RF7+DyvdG8=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.0",
+    patches=["//:third_party/com_github_go_toolsmith_astcopy.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_go_toolsmith_strparse",
+    importpath = "github.com/go-toolsmith/strparse",
+    sum = "h1:Vcw78DnpCAKlM20kSbAyO4mPfJn/lyYA4BJUDxe2Jb4=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.0",
+    patches=["//:third_party/com_github_go_toolsmith_strparse.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_go_toolsmith_typep",
+    importpath = "github.com/go-toolsmith/typep",
+    sum = "h1:zKymWyA1TRYvqYrYDrfEMZULyrhcnGY3x7LDKU2XQaA=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.0",
+    patches=["//:third_party/com_github_go_toolsmith_typep.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_go_toolsmith_astequal",
+    importpath = "github.com/go-toolsmith/astequal",
+    sum = "h1:4zxD8j3JRFNyLN46lodQuqz3xdKSrur7U/sr0SDS/gQ=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.0",
+    patches=["//:third_party/com_github_go_toolsmith_astequal.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_golintpack_lintpack",
+    importpath = "github.com/go-lintpack/lintpack",
+    sum = "h1:DI5mA3+eKdWeJ40nU4d6Wc26qmdG8RCi/btYq0TuRN0=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.5.2",
+    patches=["//:third_party/com_github_golintpack_lintpack.patch"],
+    patch_args = ["-p1"],
+)

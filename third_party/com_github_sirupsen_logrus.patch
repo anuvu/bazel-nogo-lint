@@ -1,0 +1,57 @@
+--- a/BUILD.bazel	2019-09-03 13:50:10.757337170 -0700
++++ b/BUILD.bazel	2019-09-03 13:50:33.951230991 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -65,3 +65,48 @@
+         "@in_gopkg_gemnasium_logrus_airbrake_hook_v2//:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "alt_exit.go",
++        "doc.go",
++        "entry.go",
++        "exported.go",
++        "formatter.go",
++        "hooks.go",
++        "json_formatter.go",
++        "logger.go",
++        "logrus.go",
++        "terminal_bsd.go",
++        "terminal_check_notappengine.go",
++        "terminal_linux.go",
++        "text_formatter.go",
++        "writer.go",
++    ],
++    importpath = "github.com/sirupsen/logrus",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@org_golang_x_crypto//ssh/terminal:go_tool_library",
++    ] + select({
++        "@io_bazel_rules_go//go/platform:darwin": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:dragonfly": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:freebsd": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:linux": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:netbsd": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:openbsd": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "//conditions:default": [],
++    }),
++)

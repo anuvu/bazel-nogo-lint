@@ -1,0 +1,24 @@
+--- a/BUILD.bazel	2019-09-03 15:02:46.914242057 -0700
++++ b/BUILD.bazel	2019-09-03 15:03:13.019314480 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -17,3 +17,15 @@
+     srcs = ["example_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "doc.go",
++        "predicates.go",
++        "safeExpr.go",
++        "simplePredicates.go",
++    ],
++    importpath = "github.com/go-toolsmith/typep",
++    visibility = ["//visibility:public"],
++)

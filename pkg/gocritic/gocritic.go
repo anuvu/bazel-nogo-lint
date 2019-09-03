@@ -1,6 +1,5 @@
 package gocritic
 
-/*
 import (
 	"context"
 	"fmt"
@@ -18,9 +17,8 @@ import (
 	"golang.cisco.com/golinters/pkg/fsutils"
 	"golang.cisco.com/golinters/pkg/result"
 	"golang.cisco.com/golinters/pkg/util"
-	"golang.org/x/tools/go/loader"
 	"golang.org/x/tools/go/analysis"
-
+	"golang.org/x/tools/go/loader"
 )
 
 const Name = "gocritic"
@@ -41,7 +39,7 @@ func (Gocritic) Desc() string {
 	return "The most opinionated Go source code linter"
 }
 
-func  normalizeCheckerInfoParams(info *lintpack.CheckerInfo) lintpack.CheckerParams {
+func normalizeCheckerInfoParams(info *lintpack.CheckerInfo) lintpack.CheckerParams {
 	// lowercase info param keys here because golangci-lint's config parser lowercases all strings
 	ret := lintpack.CheckerParams{}
 	for k, v := range info.Params {
@@ -51,7 +49,7 @@ func  normalizeCheckerInfoParams(info *lintpack.CheckerInfo) lintpack.CheckerPar
 	return ret
 }
 
-func configureCheckerInfo(info *lintpack.CheckerInfo, allParams map[string]config.LintersSettings.GocriticCheckSettings) error {
+func configureCheckerInfo(info *lintpack.CheckerInfo, allParams map[string]config.GocriticCheckSettings) error {
 	params := allParams[strings.ToLower(info.Name)]
 	if params == nil { // no config for this checker
 		return nil
@@ -176,4 +174,4 @@ func runOnFile(ctx *lintpack.Context, f *ast.File, checkers []*lintpack.Checker,
 	}
 
 	wg.Wait()
-}*/
+}

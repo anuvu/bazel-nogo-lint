@@ -5,4 +5,13 @@ go_tool_library(
     srcs = ["gocritic.go"],
     importpath = "golang.cisco.com/golinters/pkg/gocritic",
     visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/config:go_tool_library",
+        "//pkg/fsutils:go_tool_library",
+        "//pkg/result:go_tool_library",
+        "//pkg/util:go_tool_library",
+        "@org_golang_x_tools//go/loader:go_tool_library",
+        "@org_golang_x_tools//go/analysis:go_tool_library",
+        "@com_github_golintpack_lintpack//:go_tool_library",
+    ],
 )

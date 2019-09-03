@@ -171,6 +171,7 @@ type LintersSettings struct {
 	Nakedret NakedretSettings
 	Prealloc PreallocSettings
 	Errcheck ErrcheckSettings
+	Gocritic GocriticSettings
 }
 
 type GovetSettings struct {
