@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 go_tool_library(
     name = "unparam",
     srcs = ["unparam.go"],
-    importpath = "golang.cisco.com/golinters/pkg/unparam",
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/unparam",
     visibility = ["//visibility:public"],
     deps = [
         "//pkg/config:go_tool_library",

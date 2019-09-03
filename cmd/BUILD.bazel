@@ -3,6 +3,6 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "go_default_library",
     srcs = ["main.go"],
-    importpath = "golang.cisco.com/golinters/cmd/main",
+    importpath = "github.com/anuvu/bazel-nogo-lint/cmd/main",
     visibility = ["//visibility:public"],
 )

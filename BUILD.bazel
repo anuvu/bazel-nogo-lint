@@ -17,7 +17,7 @@ gazelle(
     external = "external",
     extra_args = ["--exclude=vendor"],
     gazelle = "@bazel_gazelle//cmd/gazelle:gazelle_pure",
-    prefix = "golang.cisco.com/golinters",
+    prefix = "github.com/anuvu/bazel-nogo-lint",
 )
 
 gazelle(
@@ -26,13 +26,13 @@ gazelle(
     external = "external",
     extra_args = ["--exclude=vendor"],
     gazelle = "@bazel_gazelle//cmd/gazelle:gazelle_pure",
-    prefix = "golang.cisco.com/golinters",
+    prefix = "github.com/anuvu/bazel-nogo-lint",
 )
 
 go_library(
     name = "go_default_library",
     srcs = ["golinter.go"],
-    importpath = "golang.cisco.com/golinters",
+    importpath = "github.com/anuvu/bazel-nogo-lint",
     visibility = ["//visibility:public"],
 )
 

@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
 go_library(
     name = "go_default_library",
     srcs = ["bodyclose.go"],
-    importpath = "golang.cisco.com/golinters/pkg/bodyclose",
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/bodyclose",
     visibility = ["//visibility:public"],
     deps = ["@com_github_timakin_bodyclose//passes/bodyclose:go_default_library"],
 )
@@ -11,7 +11,7 @@ go_library(
 go_tool_library(
     name = "bodyclose",
     srcs = ["bodyclose.go"],
-    importpath = "golang.cisco.com/golinters/pkg",
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg",
     deps = [
         "@org_golang_x_tools//go/analysis:go_tool_library",
         "@com_github_timakin_bodyclose//passes/bodyclose:go_tool_library",

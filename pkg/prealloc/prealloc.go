@@ -5,7 +5,7 @@ import (
 	"go/token"
 
 	"github.com/golangci/prealloc"
-	"golang.cisco.com/golinters/pkg/util"
+	"github.com/anuvu/bazel-nogo-lint/pkg/util"
 	"golang.org/x/tools/go/analysis"
 )
 

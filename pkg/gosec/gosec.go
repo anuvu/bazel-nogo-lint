@@ -10,8 +10,8 @@ import (
 
 	"github.com/golangci/gosec"
 	"github.com/golangci/gosec/rules"
-	"golang.cisco.com/golinters/pkg/result"
-	"golang.cisco.com/golinters/pkg/util"
+	"github.com/anuvu/bazel-nogo-lint/pkg/result"
+	"github.com/anuvu/bazel-nogo-lint/pkg/util"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/loader"
 )

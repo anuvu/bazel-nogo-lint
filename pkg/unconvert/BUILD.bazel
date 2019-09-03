@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 go_tool_library(
     name = "unconvert",
     srcs = ["unconvert.go"],
-    importpath = "golang.cisco.com/golinters/pkg/unconvert",
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/unconvert",
     visibility = ["//visibility:public"],
     deps = [
         "//pkg/result:go_tool_library",

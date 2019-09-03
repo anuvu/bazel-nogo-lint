@@ -1,4 +1,4 @@
-module golang.cisco.com/golinters
+module github.com/anuvu/bazel-nogo-lint
 
 go 1.12
 
