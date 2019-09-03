@@ -55,7 +55,7 @@ nogo(
         "//pkg/golint:golint",
         "//pkg/gosec:gosec",
         "//pkg/ineffassign:ineffassign",
-#        "//pkg/interfacer:interfacer",
+        "//pkg/interfacer:interfacer",
         "//pkg/lll:lll",
         "//pkg/maligned:maligned",
         "//pkg/misspell:misspell",
@@ -63,7 +63,7 @@ nogo(
         "//pkg/prealloc:prealloc",
         "//pkg/structcheck:structcheck",
         "//pkg/unconvert:unconvert",
-#        "//pkg/unparam:unparam",
+        "//pkg/unparam:unparam",
         "//pkg/varcheck:varcheck",
         ],
 )
