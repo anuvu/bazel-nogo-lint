@@ -1,0 +1,120 @@
+--- a/checkers/BUILD.bazel	2019-09-03 14:17:37.307871164 -0700
++++ b/checkers/BUILD.bazel	2019-09-03 14:18:17.607161670 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -86,3 +86,80 @@
+         "@com_github_golintpack_lintpack//linttest:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "appendAssign_checker.go",
++        "appendCombine_checker.go",
++        "assignOp_checker.go",
++        "badCond_checker.go",
++        "boolExprSimplify_checker.go",
++        "builtinShadow_checker.go",
++        "captLocal_checker.go",
++        "caseOrder_checker.go",
++        "checkers.go",
++        "commentFormatting_checker.go",
++        "commentedOutCode_checker.go",
++        "commentedOutImport_checker.go",
++        "defaultCaseOrder_checker.go",
++        "deprecatedComment_checker.go",
++        "docStub_checker.go",
++        "dupArg_checker.go",
++        "dupBranchBody_checker.go",
++        "dupCase_checker.go",
++        "dupSubExpr_checker.go",
++        "elseif_checker.go",
++        "emptyFallthrough_checker.go",
++        "emptyStringTest_checker.go",
++        "equalFold_checker.go",
++        "flagDeref_checker.go",
++        "flagName_checker.go",
++        "hugeParam_checker.go",
++        "ifElseChain_checker.go",
++        "importShadow_checker.go",
++        "indexAlloc_checker.go",
++        "initClause_checker.go",
++        "methodExprCall_checker.go",
++        "nestingReduce_checker.go",
++        "nilValReturn_checker.go",
++        "offBy1_checker.go",
++        "paramTypeCombine_checker.go",
++        "ptrToRefParam_checker.go",
++        "rangeExprCopy_checker.go",
++        "rangeValCopy_checker.go",
++        "regexpMust_checker.go",
++        "singleCaseSwitch_checker.go",
++        "sloppyLen_checker.go",
++        "sloppyReassign_checker.go",
++        "switchTrue_checker.go",
++        "typeSwitchVar_checker.go",
++        "typeUnparen_checker.go",
++        "underef_checker.go",
++        "unlabelStmt_checker.go",
++        "unlambda_checker.go",
++        "unnamedResult_checker.go",
++        "unnecessaryBlock_checker.go",
++        "unslice_checker.go",
++        "utils.go",
++        "valSwap_checker.go",
++        "weakCond_checker.go",
++        "wrapperFunc_checker.go",
++        "yodaStyleExpr_checker.go",
++    ],
++    importpath = "github.com/go-critic/go-critic/checkers",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//checkers/internal/lintutil:go_tool_library",
++        "@com_github_go_toolsmith_astcast//:go_tool_library",
++        "@com_github_go_toolsmith_astcopy//:go_tool_library",
++        "@com_github_go_toolsmith_astequal//:go_tool_library",
++        "@com_github_go_toolsmith_astfmt//:go_tool_library",
++        "@com_github_go_toolsmith_astp//:go_tool_library",
++        "@com_github_go_toolsmith_strparse//:go_tool_library",
++        "@com_github_go_toolsmith_typep//:go_tool_library",
++        "@com_github_golintpack_lintpack//:go_tool_library",
++        "@com_github_golintpack_lintpack//astwalk:go_tool_library",
++        "@org_golang_x_tools//go/ast/astutil:go_tool_library",
++    ],
++)
+--- a/checkers/internal/lintutil/BUILD.bazel	2019-09-03 15:07:56.180571646 -0700
++++ b/checkers/internal/lintutil/BUILD.bazel	2019-09-03 15:08:27.451124940 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -18,3 +18,22 @@
+         "@org_golang_x_tools//go/ast/astutil:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "astfind.go",
++        "astflow.go",
++        "astset.go",
++        "coerce.go",
++        "lintutil.go",
++    ],
++    importpath = "github.com/go-critic/go-critic/checkers/internal/lintutil",
++    visibility = ["//checkers:__subpackages__"],
++    deps = [
++        "@com_github_go_toolsmith_astequal//:go_tool_library",
++        "@com_github_go_toolsmith_astp//:go_tool_library",
++        "@com_github_go_toolsmith_typep//:go_tool_library",
++        "@org_golang_x_tools//go/ast/astutil:go_tool_library",
++    ],
++)

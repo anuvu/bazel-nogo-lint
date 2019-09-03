@@ -1,0 +1,51 @@
+--- a/pkg/logutils/BUILD.bazel	2019-08-30 16:21:14.481446409 -0700
++++ b/pkg/logutils/BUILD.bazel	2019-08-30 16:22:01.601728643 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -19,3 +19,23 @@
+         "@com_github_sirupsen_logrus//:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "log.go",
++        "log_mock.go",
++        "logutils.go",
++        "out.go",
++        "stderr_log.go",
++    ],
++    importpath = "github.com/golangci/golangci-lint/pkg/logutils",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//pkg/exitcodes:go_tool_library",
++        "@com_github_fatih_color//:go_tool_library",
++        "@com_github_golang_mock//gomock:go_tool_library",
++        "@com_github_mattn_go_colorable//:go_tool_library",
++        "@com_github_sirupsen_logrus//:go_tool_library",
++    ],
++)
+--- a/pkg/exitcodes/BUILD.bazel	2019-09-03 11:46:20.595362868 -0700
++++ b/pkg/exitcodes/BUILD.bazel	2019-09-03 11:46:57.182350257 -0700
+@@ -1,8 +1,15 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = ["exitcodes.go"],
+     importpath = "github.com/golangci/golangci-lint/pkg/exitcodes",
+     visibility = ["//visibility:public"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["exitcodes.go"],
++    importpath = "github.com/golangci/golangci-lint/pkg/exitcodes",
++    visibility = ["//visibility:public"],
+ )

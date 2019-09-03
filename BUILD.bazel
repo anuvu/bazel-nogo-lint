@@ -50,7 +50,7 @@ nogo(
         "//pkg/gochecknoglobals:gochecknoglobals",
         "//pkg/gochecknoinits:gochecknoinits",
         "//pkg/goconst:goconst",
-#        "//pkg/gocritic:gocritic",
+        "//pkg/gocritic:gocritic",
         "//pkg/gocyclo:gocyclo",
         "//pkg/golint:golint",
         "//pkg/gosec:gosec",

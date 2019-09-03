@@ -1,0 +1,59 @@
+--- a/BUILD.bazel	2019-09-03 11:29:36.130531843 -0700
++++ b/BUILD.bazel	2019-09-03 11:30:43.833357333 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -52,3 +52,50 @@
+     srcs = ["colorable_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "colorable_others.go",
++        "colorable_windows.go",
++        "noncolorable.go",
++    ],
++    importpath = "github.com/mattn/go-colorable",
++    visibility = ["//visibility:public"],
++    deps = select({
++        "@io_bazel_rules_go//go/platform:android": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:darwin": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:dragonfly": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:freebsd": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:linux": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:nacl": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:netbsd": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:openbsd": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:plan9": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:solaris": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:windows": [
++            "@com_github_mattn_go_isatty//:go_tool_library",
++        ],
++        "//conditions:default": [],
++    }),
++)

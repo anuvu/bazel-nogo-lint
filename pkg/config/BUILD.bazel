@@ -2,7 +2,16 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
 
 go_tool_library(
     name = "go_tool_library",
-    srcs = ["config.go"],
+    srcs = [
+        "config.go",
+        "config_gocritic.go",
+    ],
     importpath = "golang.cisco.com/golinters/pkg/config",
     visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_pkg_errors//:go_tool_library",
+        "@com_github_golintpack_lintpack//:go_tool_library",
+        "@com_github_golangci_golangci_lint//pkg/logutils:go_tool_library",
+        "@com_github_go_critic_go_critic//checkers:go_tool_library",
+    ]
 )

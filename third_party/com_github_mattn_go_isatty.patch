@@ -1,0 +1,39 @@
+--- a/BUILD.bazel	2019-09-03 13:26:51.838901812 -0700
++++ b/BUILD.bazel	2019-09-03 13:32:40.893870812 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -36,3 +36,30 @@
+     ],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "doc.go",
++        "isatty_bsd.go",
++        "isatty_linux.go",
++        "isatty_linux_ppc64x.go",
++        "isatty_others.go",
++        "isatty_solaris.go",
++        "isatty_windows.go",
++    ],
++    importpath = "github.com/mattn/go-isatty",
++    visibility = ["//visibility:public"],
++    deps = select({
++        "@io_bazel_rules_go//go/platform:linux_ppc64": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:linux_ppc64le": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:solaris_amd64": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "//conditions:default": [],
++    }),
++)
