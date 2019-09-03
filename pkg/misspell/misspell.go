@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/golangci/misspell"
-	"golang.cisco.com/golinters/pkg/util"
+	"github.com/anuvu/bazel-nogo-lint/pkg/util"
 	"golang.org/x/tools/go/analysis"
 )
 

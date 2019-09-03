@@ -3,14 +3,14 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library","go_tool_library")
 go_tool_library(
     name = "go_tool_library",
     srcs = ["issue.go"],
-    importpath = "golang.cisco.com/golinters/pkg/result",
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/result",
     visibility = ["//visibility:public"],
 )
 
 go_library(
     name = "go_default_library",
     srcs = ["issue.go"],
-    importpath = "golang.cisco.com/golinters/pkg/result",
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/result",
     visibility = ["//visibility:public"],
 )
 

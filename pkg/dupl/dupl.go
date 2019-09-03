@@ -5,9 +5,9 @@ import (
 	"go/token"
 
 	duplAPI "github.com/golangci/dupl"
-	"golang.cisco.com/golinters/pkg/config"
-	"golang.cisco.com/golinters/pkg/fsutils"
-	"golang.cisco.com/golinters/pkg/util"
+	"github.com/anuvu/bazel-nogo-lint/pkg/config"
+	"github.com/anuvu/bazel-nogo-lint/pkg/fsutils"
+	"github.com/anuvu/bazel-nogo-lint/pkg/util"
 	"golang.org/x/tools/go/analysis"
 )
 

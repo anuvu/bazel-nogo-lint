@@ -5,7 +5,7 @@ import (
 	"go/types"
 
 	structcheckAPI "github.com/golangci/check/cmd/structcheck"
-	"golang.cisco.com/golinters/pkg/util"
+	"github.com/anuvu/bazel-nogo-lint/pkg/util"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/loader"
 )

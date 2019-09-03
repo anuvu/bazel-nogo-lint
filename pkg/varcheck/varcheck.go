@@ -5,7 +5,7 @@ import (
 	"go/types"
 
 	varcheckAPI "github.com/golangci/check/cmd/varcheck"
-	"golang.cisco.com/golinters/pkg/util"
+	"github.com/anuvu/bazel-nogo-lint/pkg/util"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/loader"
 )

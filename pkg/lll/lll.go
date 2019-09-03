@@ -8,7 +8,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"golang.cisco.com/golinters/pkg/result"
+	"github.com/anuvu/bazel-nogo-lint/pkg/result"
 	"golang.org/x/tools/go/analysis"
 )
 

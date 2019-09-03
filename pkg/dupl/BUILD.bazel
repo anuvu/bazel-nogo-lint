@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 go_tool_library(
     name = "dupl",
     srcs = ["dupl.go"],
-    importpath = "golang.cisco.com/golinters/pkg/dupl",
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/dupl",
     visibility = ["//visibility:public"],
     deps = [
         "//pkg/config:go_tool_library",

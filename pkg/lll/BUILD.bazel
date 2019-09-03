@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
 go_tool_library(
     name = "lll",
     srcs = ["lll.go"],
-    importpath = "golang.cisco.com/golinters/pkg/lll",
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/lll",
     visibility = ["//visibility:public"],
     deps = [
         "//pkg/config:go_tool_library",

@@ -6,7 +6,7 @@ import (
 	"go/types"
 
 	malignedAPI "github.com/golangci/maligned"
-	"golang.cisco.com/golinters/pkg/util"
+	"github.com/anuvu/bazel-nogo-lint/pkg/util"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/loader"
 )

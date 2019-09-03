@@ -6,7 +6,7 @@ go_tool_library(
         "config.go",
         "config_gocritic.go",
     ],
-    importpath = "golang.cisco.com/golinters/pkg/config",
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/config",
     visibility = ["//visibility:public"],
     deps = [
         "@com_github_pkg_errors//:go_tool_library",

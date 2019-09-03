@@ -13,10 +13,10 @@ import (
 	"sync"
 
 	"github.com/go-lintpack/lintpack"
-	"golang.cisco.com/golinters/pkg/config"
-	"golang.cisco.com/golinters/pkg/fsutils"
-	"golang.cisco.com/golinters/pkg/result"
-	"golang.cisco.com/golinters/pkg/util"
+	"github.com/anuvu/bazel-nogo-lint/pkg/config"
+	"github.com/anuvu/bazel-nogo-lint/pkg/fsutils"
+	"github.com/anuvu/bazel-nogo-lint/pkg/result"
+	"github.com/anuvu/bazel-nogo-lint/pkg/util"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/loader"
 )
