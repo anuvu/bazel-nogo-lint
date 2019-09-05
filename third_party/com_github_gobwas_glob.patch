@@ -174,7 +174,7 @@
 +    visibility = ["//visibility:public"],
 +    deps = ["//util/runes:go_tool_library"],
 +)
---- a/syntax/BUILD.bazel.orig	2019-08-26 16:12:32.278500628 -0700
+--- a/syntax/BUILD.bazel	2019-08-26 16:12:32.278500628 -0700
 +++ b/syntax/BUILD.bazel	2019-08-26 16:13:04.929316458 -0700
 @@ -1,4 +1,4 @@
 -load("@io_bazel_rules_go//go:def.bzl", "go_library")

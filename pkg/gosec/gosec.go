@@ -8,10 +8,10 @@ import (
 	"log"
 	"strconv"
 
-	"github.com/golangci/gosec"
-	"github.com/golangci/gosec/rules"
 	"github.com/anuvu/bazel-nogo-lint/pkg/result"
 	"github.com/anuvu/bazel-nogo-lint/pkg/util"
+	"github.com/golangci/gosec"
+	"github.com/golangci/gosec/rules"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/loader"
 )
@@ -30,6 +30,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	logger := log.New(ioutil.Discard, "", 0)
 	analyzer := gosec.NewAnalyzer(gasConfig, logger)
 	analyzer.LoadRules(enabledRules.Builders())
+
 	var createdPkgs []*loader.PackageInfo
 	createdPkgs = append(createdPkgs, util.MakeFakeLoaderPackageInfo(pass))
 	allPkgs := map[*types.Package]*loader.PackageInfo{}

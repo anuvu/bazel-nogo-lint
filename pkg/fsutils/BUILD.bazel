@@ -13,3 +13,10 @@ go_tool_library(
     importpath = "github.com/anuvu/bazel-nogo-lint/pkg/fsutils",
     visibility = ["//visibility:public"],
 )
+
+go_library(
+    name = "go_default_library",
+    srcs = ["fsutils.go"],
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/fsutils",
+    visibility = ["//visibility:public"],
+)

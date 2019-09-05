@@ -1,0 +1,65 @@
+--- a/BUILD.bazel	2019-09-05 13:08:19.794680838 -0700
++++ b/BUILD.bazel	2019-09-05 13:08:46.737131327 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -47,3 +47,33 @@
+     ],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "afero.go",
++        "basepath.go",
++        "cacheOnReadFs.go",
++        "const_bsds.go",
++        "const_win_unix.go",
++        "copyOnWriteFs.go",
++        "httpFs.go",
++        "ioutil.go",
++        "lstater.go",
++        "match.go",
++        "memmap.go",
++        "os.go",
++        "path.go",
++        "readonlyfs.go",
++        "regexpfs.go",
++        "unionFile.go",
++        "util.go",
++    ],
++    importpath = "github.com/spf13/afero",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//mem:go_tool_library",
++        "@org_golang_x_text//transform:go_tool_library",
++        "@org_golang_x_text//unicode/norm:go_tool_library",
++    ],
++)
+--- a/mem/BUILD.bazel	2019-09-05 13:44:32.875209304 -0700
++++ b/mem/BUILD.bazel	2019-09-05 13:44:56.421131868 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -16,3 +16,14 @@
+     srcs = ["file_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "dir.go",
++        "dirmap.go",
++        "file.go",
++    ],
++    importpath = "github.com/spf13/afero/mem",
++    visibility = ["//visibility:public"],
++)

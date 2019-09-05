@@ -125,6 +125,12 @@
       "/external/": "no need to vet third party code"
     }
   },
+  "megacheck": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
   "misspell": {
     "exclude_files": {
       "/vendor/": "no need to vet third party code",
@@ -138,6 +144,12 @@
     }
   },
   "prealloc": {
+    "exclude_files": {
+      "/vendor/": "no need to vet third party code",
+      "/external/": "no need to vet third party code"
+    }
+  },
+  "scopelint": {
     "exclude_files": {
       "/vendor/": "no need to vet third party code",
       "/external/": "no need to vet third party code"

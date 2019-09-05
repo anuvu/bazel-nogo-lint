@@ -1,0 +1,23 @@
+--- a/BUILD.bazel	2019-09-05 12:05:46.153634508 -0700
++++ b/BUILD.bazel	2019-09-05 12:06:05.723232399 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -20,3 +20,14 @@
+     embed = [":go_default_library"],
+     deps = ["@com_github_stretchr_testify//require:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "default_notepad.go",
++        "log_counter.go",
++        "notepad.go",
++    ],
++    importpath = "github.com/spf13/jwalterweatherman",
++    visibility = ["//visibility:public"],
++)

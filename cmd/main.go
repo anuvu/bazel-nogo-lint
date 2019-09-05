@@ -11,6 +11,9 @@ func ReturnId() (id int, err error) {
 	for i := 0; i != 5; i++ {
 		mySlice = append(mySlice, struct{}{})
 	}
+	xs := make([]int, 0)
+	xs = append(xs, 1)
+	xs = append(xs, 2)
 	id = 10
 	return
 }
@@ -35,28 +38,28 @@ func main() {
 	htt3 := "https"
 
 	url := "google"
-	url = fmt.Sprint("%s://%s", htt, url)
+	url = fmt.Sprintf("%s://%s", htt, url)
 	resp, _ := http.Get(url)
 	fmt.Println(resp)
 	h := md5.New()
 	fmt.Println(h)
 
 	url = "google"
-	url = fmt.Sprint("%s://%s", htt1, url)
+	url = fmt.Sprintf("%s://%s", htt1, url)
 	resp, _ = http.Get(url)
 	fmt.Println(resp)
 	h = md5.New()
 	fmt.Println(h)
 
 	url = "google"
-	url = fmt.Sprint("%s://%s", htt2, url)
+	url = fmt.Sprintf("%s://%s", htt2, url)
 	resp, _ = http.Get(url)
 	fmt.Println(resp)
 	h = md5.New()
 	fmt.Println(h)
 
 	url = "google"
-	url = fmt.Sprint("%s://%s", htt3, url)
+	url = fmt.Sprintf("%s://%s", htt3, url)
 	resp, _ = http.Get(url)
 	fmt.Println(resp)
 	h = md5.New()

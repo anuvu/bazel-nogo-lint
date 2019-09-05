@@ -27,8 +27,15 @@ require (
 	github.com/golangci/prealloc v0.0.0-20180630174525-215b22d4de21
 	github.com/golangci/unconvert v0.0.0-20180507085042-28b1c447d1f4
 	github.com/pkg/errors v0.8.0
+	github.com/sirupsen/logrus v1.0.5
 	github.com/timakin/bodyclose v0.0.0-20190407043127-4a873e97b2bb
-	golang.org/x/tools v0.0.0-20190521203540-521d6ed310dd
+	golang.org/x/crypto v0.0.0-20190829043050-9756ffdc2472 // indirect
+	golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297 // indirect
+	golang.org/x/sys v0.0.0-20190904154756-749cb33beabd // indirect
+	golang.org/x/text v0.3.2 // indirect
+	golang.org/x/tools v0.0.0-20190906185503-8159a2d3d69b
+	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
+	honnef.co/go/tools v0.0.1-2019.2.3
 	mvdan.cc/interfacer v0.0.0-20180901003855-c20040233aed
 	mvdan.cc/unparam v0.0.0-20190124213536-fbb59629db34
 )

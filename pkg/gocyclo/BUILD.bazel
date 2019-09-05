@@ -1,6 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
 
-
 go_tool_library(
     name = "gocyclo",
     srcs = ["gocyclo.go"],
@@ -8,8 +7,19 @@ go_tool_library(
     deps = [
         "@org_golang_x_tools//go/analysis:go_tool_library",
         "@com_github_golangci_gocyclo//pkg/gocyclo:go_tool_library",
-         "//pkg/util:go_tool_library",
-                
+        "//pkg/util:go_tool_library",
     ],
     visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "go_default_library",
+    srcs = ["gocyclo.go"],
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/gocyclo",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/util:go_default_library",
+        "@com_github_golangci_gocyclo//pkg/gocyclo:go_default_library",
+        "@org_golang_x_tools//go/analysis:go_default_library",
+    ],
 )

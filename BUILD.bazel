@@ -9,8 +9,7 @@
 
 load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
-load("@io_bazel_rules_go//go:def.bzl", "go_library", "nogo")
-
+load("@io_bazel_rules_go//go:def.bzl", "nogo")
 
 gazelle(
     name = "gazelle",
@@ -55,15 +54,17 @@ nogo(
         "//pkg/golint:golint",
         "//pkg/gosec:gosec",
         "//pkg/ineffassign:ineffassign",
-        "//pkg/interfacer:interfacer",
-        "//pkg/lll:lll",
+        #"//pkg/interfacer:interfacer", // FIXME
+        #"//pkg/lll:lll",
         "//pkg/maligned:maligned",
-        "//pkg/misspell:misspell",
-        "//pkg/nakedret:nakedret",
+        #"//pkg/megacheck:megacheck", // FIXME
+        #"//pkg/misspell:misspell", // FIXME
+        #"//pkg/nakedret:nakedret", // FIXME
         "//pkg/prealloc:prealloc",
+        "//pkg/scopelint:scopelint",
         "//pkg/structcheck:structcheck",
         "//pkg/unconvert:unconvert",
-        "//pkg/unparam:unparam",
+        #"//pkg/unparam:unparam", // FIXME
         "//pkg/varcheck:varcheck",
-        ],
+    ],
 )

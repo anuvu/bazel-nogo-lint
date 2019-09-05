@@ -1,0 +1,50 @@
+--- a/BUILD.bazel	2019-09-05 12:03:43.003579097 -0700
++++ b/BUILD.bazel	2019-09-05 12:04:10.821850507 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -57,4 +57,41 @@
+         ],
+         "//conditions:default": [],
+     }),
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "fen.go",
++        "fsnotify.go",
++        "inotify.go",
++        "inotify_poller.go",
++        "kqueue.go",
++        "open_mode_bsd.go",
++        "open_mode_darwin.go",
++        "windows.go",
++    ],
++    importpath = "github.com/fsnotify/fsnotify",
++    visibility = ["//visibility:public"],
++    deps = select({
++        "@io_bazel_rules_go//go/platform:darwin": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:dragonfly": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:freebsd": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:linux": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:netbsd": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "@io_bazel_rules_go//go/platform:openbsd": [
++            "@org_golang_x_sys//unix:go_tool_library",
++        ],
++        "//conditions:default": [],
++    }),
+ )

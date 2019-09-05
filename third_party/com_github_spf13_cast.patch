@@ -1,19 +1,22 @@
---- a/BUILD.bazel	2019-08-29 14:33:01.090866630 -0700
-+++ b/BUILD.bazel	2019-08-29 14:33:58.945619945 -0700
+--- a/BUILD.bazel	2019-09-04 16:51:59.039756658 -0700
++++ b/BUILD.bazel	2019-09-04 16:52:23.757774926 -0700
 @@ -1,4 +1,4 @@
 -load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 +load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
  
  go_library(
      name = "go_default_library",
-@@ -12,3 +12,10 @@
-     srcs = ["ineffassign_test.go"],
+@@ -16,3 +16,13 @@
      embed = [":go_default_library"],
+     deps = ["@com_github_stretchr_testify//assert:go_default_library"],
  )
 +
 +go_tool_library(
 +    name = "go_tool_library",
-+    srcs = ["ineffassign.go"],
-+    importpath = "github.com/golangci/ineffassign",
++    srcs = [
++        "cast.go",
++        "caste.go",
++    ],
++    importpath = "github.com/spf13/cast",
 +    visibility = ["//visibility:public"],
 +)

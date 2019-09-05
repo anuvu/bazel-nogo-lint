@@ -1,19 +1,23 @@
---- a/BUILD.bazel	2019-08-29 14:33:01.090866630 -0700
-+++ b/BUILD.bazel	2019-08-29 14:33:58.945619945 -0700
+--- a/BUILD.bazel	2019-09-04 16:29:30.650991355 -0700
++++ b/BUILD.bazel	2019-09-04 16:29:49.852559195 -0700
 @@ -1,4 +1,4 @@
 -load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 +load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
  
  go_library(
      name = "go_default_library",
-@@ -12,3 +12,10 @@
-     srcs = ["ineffassign_test.go"],
+@@ -22,3 +22,14 @@
+     ],
      embed = [":go_default_library"],
  )
 +
 +go_tool_library(
 +    name = "go_tool_library",
-+    srcs = ["ineffassign.go"],
-+    importpath = "github.com/golangci/ineffassign",
++    srcs = [
++        "decode_hooks.go",
++        "error.go",
++        "mapstructure.go",
++    ],
++    importpath = "github.com/mitchellh/mapstructure",
 +    visibility = ["//visibility:public"],
 +)

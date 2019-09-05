@@ -13,5 +13,21 @@ go_tool_library(
         "@com_github_golintpack_lintpack//:go_tool_library",
         "@com_github_golangci_golangci_lint//pkg/logutils:go_tool_library",
         "@com_github_go_critic_go_critic//checkers:go_tool_library",
-    ]
+    ],
+)
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "config.go",
+        "config_gocritic.go",
+    ],
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/config",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_go_critic_go_critic//checkers:go_default_library",
+        "@com_github_golangci_golangci_lint//pkg/logutils:go_default_library",
+        "@com_github_golintpack_lintpack//:go_default_library",
+        "@com_github_pkg_errors//:go_default_library",
+    ],
 )

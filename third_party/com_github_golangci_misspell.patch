@@ -1,4 +1,4 @@
---- a/BUILD.bazel.orig	2019-08-28 14:40:12.953386653 -0700
+--- a/BUILD.bazel	2019-08-28 14:40:12.953386653 -0700
 +++ b/BUILD.bazel	2019-08-28 14:40:44.691977611 -0700
 @@ -1,4 +1,4 @@
 -load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")

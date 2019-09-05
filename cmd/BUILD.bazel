@@ -1,8 +1,14 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
     name = "go_default_library",
     srcs = ["main.go"],
-    importpath = "github.com/anuvu/bazel-nogo-lint/cmd/main",
+    importpath = "github.com/anuvu/bazel-nogo-lint/cmd",
+    visibility = ["//visibility:public"],
+)
+
+go_binary(
+    name = "cmd",
+    embed = [":go_default_library"],
     visibility = ["//visibility:public"],
 )
