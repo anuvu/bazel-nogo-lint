@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_tool_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
 
 go_tool_library(
     name = "dupl",
@@ -12,5 +12,19 @@ go_tool_library(
         "//pkg/util:go_tool_library",
         "@com_github_golangci_dupl//:go_tool_library",
         "@org_golang_x_tools//go/analysis:go_tool_library",
+    ],
+)
+
+go_library(
+    name = "go_default_library",
+    srcs = ["dupl.go"],
+    importpath = "github.com/anuvu/bazel-nogo-lint/pkg/dupl",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/config:go_default_library",
+        "//pkg/fsutils:go_default_library",
+        "//pkg/util:go_default_library",
+        "@com_github_golangci_dupl//:go_default_library",
+        "@org_golang_x_tools//go/analysis:go_default_library",
     ],
 )

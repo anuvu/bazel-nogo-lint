@@ -1,0 +1,28 @@
+--- a/BUILD.bazel	2019-09-04 16:46:17.767824919 -0700
++++ b/BUILD.bazel	2019-09-04 16:46:40.121650147 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -29,3 +29,19 @@
+     embed = [":go_default_library"],
+     deps = ["//assert:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "decode.go",
++        "doc.go",
++        "integrate.go",
++        "lex.go",
++        "load.go",
++        "parser.go",
++        "properties.go",
++        "rangecheck.go",
++    ],
++    importpath = "github.com/magiconair/properties",
++    visibility = ["//visibility:public"],
++)

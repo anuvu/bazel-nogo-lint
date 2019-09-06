@@ -82,6 +82,8 @@ go_repository(
     build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v1.4.7",
+    patches=["//:third_party/com_github_fsnotify_fsnotify.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -438,6 +440,8 @@ go_repository(
      build_file_proto_mode = "disable",
     build_extra_args = ["-exclude=vendor"],
     version = "v2.2.1",
+    patches=["//:third_party/in_gopkg_yaml_v2.patch"],
+    patch_args = ["-p1"],
 )
 
 go_repository(
@@ -635,5 +639,148 @@ go_repository(
     build_extra_args = ["-exclude=vendor"],
     version = "v0.5.2",
     patches=["//:third_party/com_github_golintpack_lintpack.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_golangci_go_tools",
+    importpath = "github.com/golangci/go-tools",
+    sum = "h1:9rtVlONXLF1rJZzvLt4tfOXtnAFUEhxCJ64Ibzj6ECo=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.0-20180109140146-af6baa5dc196",
+    patches=["//:third_party/com_github_golangci_go_tools.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_spf13_viper",
+    importpath = "github.com/spf13/viper",
+    sum = "h1:Ncr3ZIuJn322w2k1qmzXDnkLAdQMlJqBa9kfAH+irso=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.2",
+    patches=["//:third_party/com_github_spf13_viper.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_burntsushi_toml",
+    importpath = "github.com/BurntSushi/toml",
+    sum = "h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.3.1",
+    patches=["//:third_party/com_github_burntsushi_toml.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_mitchellh_go_homedir",
+    importpath = "github.com/mitchellh/go-homedir",
+    sum = "h1:vKb8ShqSby24Yrqr/yDYkuFz8d0WUjys40rvnGC8aR0=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.0",
+    patches=["//:third_party/com_github_mitchellh_go_homedir.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_hashicorp_hcl",
+    importpath = "github.com/hashicorp/hcl",
+    sum = "h1:xdsDDbiBDQTKASoGEZ+pEmF1OnWuu8AQ9I8iNbHNeno=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.0-20180404174102-ef8a98b0bbce",
+    patches=["//:third_party/com_github_hashicorp_hcl.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_mitchellh_mapstructure",
+    importpath = "github.com/mitchellh/mapstructure",
+    sum = "h1:+MZW2uvHgN8kYvksEN3f7eFL2wpzk0GxmlFsMybWc7E=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.0-20180220230111-00c29f56e238",
+    patches=["//:third_party/com_github_mitchellh_mapstructure.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_magiconair_properties",
+    importpath = "github.com/magiconair/properties",
+    sum = "h1:U+1DqNen04MdEPgFiIwdOUiqZ8qPa37xgogX/sd3+54=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.7.6",
+    patches=["//:third_party/com_github_magiconair_properties.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_spf13_cast",
+    importpath = "github.com/spf13/cast",
+    sum = "h1:HHl1DSRbEQN2i8tJmtS6ViPyHx35+p51amrdsiTCrkg=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.2.0",
+    patches=["//:third_party/com_github_spf13_cast.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_spf13_jwalterweatherman",
+    importpath = "github.com/spf13/jwalterweatherman",
+    sum = "h1:2ZXvIUGghLpdTVHR1UfvfrzoVlZaE/yOWC5LueIHZig=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.0-20180109140146-7c0cea34c8ec",
+    patches=["//:third_party/com_github_spf13_jwalterweatherman.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_spf13_pflag",
+    importpath = "github.com/spf13/pflag",
+    sum = "h1:aCvUg6QPl3ibpQUxyLkrEkCHtPqYJL4x9AuhqVqFis4=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.0.1",
+    patches=["//:third_party/com_github_spf13_pflag.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_spf13_afero",
+    importpath = "github.com/spf13/afero",
+    sum = "h1:bopulORc2JeYaxfHLvJa5NzxviA9PoWhpiiJkru7Ji4=",
+     build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.1.0",
+    patches=["//:third_party/com_github_spf13_afero.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "com_github_pelletier_go_toml",
+    importpath = "github.com/pelletier/go-toml",
+    sum = "h1:cmiOvKzEunMsAxyhXSzpL5Q1CRKpVv0KQsnAIcSEVYM=",
+    build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v1.1.0",
+    patches=["//:third_party/com_github_pelletier_go_toml.patch"],
+    patch_args = ["-p1"],
+)
+
+go_repository(
+    name = "co_honnef_to_tools",
+    importpath = "honnef.co/go/tools",
+    sum = "h1:3JgtbtFHMiCmsznwGVTUWbgGov+pVqnlf1dEJTNAXeM=",
+    build_file_proto_mode = "disable",
+    build_extra_args = ["-exclude=vendor"],
+    version = "v0.0.1-2019.2.3",
+    patches=["//:third_party/co_honnef_to_tools.patch"],
     patch_args = ["-p1"],
 )

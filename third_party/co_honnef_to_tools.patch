@@ -1,0 +1,658 @@
+--- a/simple/BUILD.bazel	2019-09-06 13:28:27.691943808 -0700
++++ b/simple/BUILD.bazel	2019-09-06 13:28:53.754071825 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -30,3 +30,27 @@
+     embed = [":go_default_library"],
+     deps = ["//lint/testutil:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "analysis.go",
++        "doc.go",
++        "lint.go",
++    ],
++    importpath = "honnef.co/go/tools/simple",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//arg:go_tool_library",
++        "//facts:go_tool_library",
++        "//internal/passes/buildssa:go_tool_library",
++        "//internal/sharedcheck:go_tool_library",
++        "//lint:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "//lint/lintutil:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++        "@org_golang_x_tools//go/analysis/passes/inspect:go_tool_library",
++        "@org_golang_x_tools//go/ast/inspector:go_tool_library",
++        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
++    ],
++)
+--- a/staticcheck/BUILD.bazel	2019-09-06 13:30:26.670643975 -0700
++++ b/staticcheck/BUILD.bazel	2019-09-06 13:30:52.343897157 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -41,3 +41,38 @@
+     embed = [":go_default_library"],
+     deps = ["//lint/testutil:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "analysis.go",
++        "buildtag.go",
++        "doc.go",
++        "knowledge.go",
++        "lint.go",
++        "rules.go",
++        "structtag.go",
++    ],
++    importpath = "honnef.co/go/tools/staticcheck",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//arg:go_tool_library",
++        "//deprecated:go_tool_library",
++        "//facts:go_tool_library",
++        "//functions:go_tool_library",
++        "//internal/passes/buildssa:go_tool_library",
++        "//internal/sharedcheck:go_tool_library",
++        "//lint:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "//lint/lintutil:go_tool_library",
++        "//printf:go_tool_library",
++        "//ssa:go_tool_library",
++        "//ssautil:go_tool_library",
++        "//staticcheck/vrp:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++        "@org_golang_x_tools//go/analysis/passes/inspect:go_tool_library",
++        "@org_golang_x_tools//go/ast/astutil:go_tool_library",
++        "@org_golang_x_tools//go/ast/inspector:go_tool_library",
++        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
++    ],
++)
+--- a/ssautil/BUILD.bazel	2019-09-06 13:32:57.307751321 -0700
++++ b/ssautil/BUILD.bazel	2019-09-06 13:33:19.037525594 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,11 @@
+     visibility = ["//visibility:public"],
+     deps = ["//ssa:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["ssautil.go"],
++    importpath = "honnef.co/go/tools/ssautil",
++    visibility = ["//visibility:public"],
++    deps = ["//ssa:go_tool_library"],
++)
+--- a/unused/BUILD.bazel	2019-09-06 13:34:09.917680045 -0700
++++ b/unused/BUILD.bazel	2019-09-06 13:34:33.144586437 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -31,3 +31,23 @@
+         "@org_golang_x_tools//go/packages:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "edge.go",
++        "edgekind_string.go",
++        "implements.go",
++        "unused.go",
++    ],
++    importpath = "honnef.co/go/tools/unused",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//go/types/typeutil:go_tool_library",
++        "//internal/passes/buildssa:go_tool_library",
++        "//lint:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "//ssa:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++    ],
++)
+--- a/go/types/typeutil/BUILD.bazel	2019-09-06 13:35:17.360263403 -0700
++++ b/go/types/typeutil/BUILD.bazel	2019-09-06 13:35:37.373897550 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -26,3 +26,18 @@
+     ],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "callee.go",
++        "identical.go",
++        "imports.go",
++        "map.go",
++        "methodsetcache.go",
++        "ui.go",
++    ],
++    importpath = "honnef.co/go/tools/go/types/typeutil",
++    visibility = ["//visibility:public"],
++    deps = ["@org_golang_x_tools//go/ast/astutil:go_tool_library"],
++)
+--- a/internal/passes/buildssa/BUILD.bazel	2019-09-06 13:36:30.806260393 -0700
++++ b/internal/passes/buildssa/BUILD.bazel	2019-09-06 13:38:00.925618791 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -17,3 +17,14 @@
+     embed = [":go_default_library"],
+     deps = ["@org_golang_x_tools//go/analysis/analysistest:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["buildssa.go"],
++    importpath = "honnef.co/go/tools/internal/passes/buildssa",
++    visibility = ["//:__subpackages__"],
++    deps = [
++        "//ssa:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++    ],
++)
+--- a/ssa/BUILD.bazel	2019-09-06 13:38:53.211219412 -0700
++++ b/ssa/BUILD.bazel	2019-09-06 13:39:15.689809879 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -86,3 +86,37 @@
+         "//conditions:default": [],
+     }),
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "blockopt.go",
++        "builder.go",
++        "const.go",
++        "create.go",
++        "doc.go",
++        "dom.go",
++        "emit.go",
++        "func.go",
++        "identical.go",
++        "identical_17.go",
++        "lift.go",
++        "lvalue.go",
++        "methods.go",
++        "mode.go",
++        "print.go",
++        "sanity.go",
++        "source.go",
++        "ssa.go",
++        "testmain.go",
++        "util.go",
++        "wrappers.go",
++        "write.go",
++    ],
++    importpath = "honnef.co/go/tools/ssa",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@org_golang_x_tools//go/ast/astutil:go_tool_library",
++        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
++    ],
++)
+--- a/arg/BUILD.bazel	2019-09-06 13:41:11.605616423 -0700
++++ b/arg/BUILD.bazel	2019-09-06 13:41:30.015119590 -0700
+@@ -1,8 +1,15 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = ["arg.go"],
+     importpath = "honnef.co/go/tools/arg",
+     visibility = ["//visibility:public"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["arg.go"],
++    importpath = "honnef.co/go/tools/arg",
++    visibility = ["//visibility:public"],
+ )
+--- a/lint/BUILD.bazel	2019-09-06 13:42:08.834289241 -0700
++++ b/lint/BUILD.bazel	2019-09-06 13:42:33.520304896 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -26,3 +26,23 @@
+     embed = [":go_default_library"],
+     deps = ["@org_golang_x_tools//go/packages:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "lint.go",
++        "runner.go",
++        "stats.go",
++    ],
++    importpath = "honnef.co/go/tools/lint",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//config:go_tool_library",
++        "//facts:go_tool_library",
++        "//internal/cache:go_tool_library",
++        "//loader:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++        "@org_golang_x_tools//go/packages:go_tool_library",
++        "@org_golang_x_tools//go/types/objectpath:go_tool_library",
++    ],
++)
+--- a/config/BUILD.bazel	2019-09-06 13:44:17.937205075 -0700
++++ b/config/BUILD.bazel	2019-09-06 13:44:39.874996333 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -10,3 +10,14 @@
+         "@org_golang_x_tools//go/analysis:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["config.go"],
++    importpath = "honnef.co/go/tools/config",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@com_github_burntsushi_toml//:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++    ],
++)
+--- a/facts/BUILD.bazel	2019-09-06 13:45:20.702329954 -0700
++++ b/facts/BUILD.bazel	2019-09-06 13:45:43.304175433 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -24,3 +24,21 @@
+     embed = [":go_default_library"],
+     deps = ["@org_golang_x_tools//go/analysis/analysistest:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "deprecated.go",
++        "generated.go",
++        "purity.go",
++        "token.go",
++    ],
++    importpath = "honnef.co/go/tools/facts",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//functions:go_tool_library",
++        "//internal/passes/buildssa:go_tool_library",
++        "//ssa:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++    ],
++)
+--- a/functions/BUILD.bazel	2019-09-06 13:49:40.556576491 -0700
++++ b/functions/BUILD.bazel	2019-09-06 13:50:01.642298176 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -11,3 +11,15 @@
+     visibility = ["//visibility:public"],
+     deps = ["//ssa:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "loops.go",
++        "pure.go",
++        "terminates.go",
++    ],
++    importpath = "honnef.co/go/tools/functions",
++    visibility = ["//visibility:public"],
++    deps = ["//ssa:go_tool_library"],
++)
+--- a/internal/cache/BUILD.bazel	2019-09-06 13:50:46.457957451 -0700
++++ b/internal/cache/BUILD.bazel	2019-09-06 13:51:07.783698734 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -20,3 +20,15 @@
+     ],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "cache.go",
++        "default.go",
++        "hash.go",
++    ],
++    importpath = "honnef.co/go/tools/internal/cache",
++    visibility = ["//:__subpackages__"],
++    deps = ["//internal/renameio:go_tool_library"],
++)
+--- a/internal/renameio/BUILD.bazel	2019-09-06 13:52:31.162506755 -0700
++++ b/internal/renameio/BUILD.bazel	2019-09-06 13:52:51.340154294 -0700
+@@ -1,8 +1,15 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = ["renameio.go"],
+     importpath = "honnef.co/go/tools/internal/renameio",
+     visibility = ["//:__subpackages__"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["renameio.go"],
++    importpath = "honnef.co/go/tools/internal/renameio",
++    visibility = ["//:__subpackages__"],
+ )
+--- a/loader/BUILD.bazel	2019-09-06 13:53:42.333947567 -0700
++++ b/loader/BUILD.bazel	2019-09-06 13:54:02.559599026 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -10,3 +10,14 @@
+         "@org_golang_x_tools//go/packages:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["loader.go"],
++    importpath = "honnef.co/go/tools/loader",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@org_golang_x_tools//go/gcexportdata:go_tool_library",
++        "@org_golang_x_tools//go/packages:go_tool_library",
++    ],
++)
+--- a/lint/lintdsl/BUILD.bazel	2019-09-06 13:54:49.779454607 -0700
++++ b/lint/lintdsl/BUILD.bazel	2019-09-06 13:55:17.725736468 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -12,3 +12,16 @@
+         "@org_golang_x_tools//go/analysis:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["lintdsl.go"],
++    importpath = "honnef.co/go/tools/lint/lintdsl",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//facts:go_tool_library",
++        "//lint:go_tool_library",
++        "//ssa:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++    ],
++)
+--- a/deprecated/BUILD.bazel	2019-09-06 13:55:57.464981245 -0700
++++ b/deprecated/BUILD.bazel	2019-09-06 13:56:18.590706196 -0700
+@@ -1,8 +1,15 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = ["stdlib.go"],
+     importpath = "honnef.co/go/tools/deprecated",
+     visibility = ["//visibility:public"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["stdlib.go"],
++    importpath = "honnef.co/go/tools/deprecated",
++    visibility = ["//visibility:public"],
+ )
+--- a/internal/sharedcheck/BUILD.bazel	2019-09-06 13:56:58.753985596 -0700
++++ b/internal/sharedcheck/BUILD.bazel	2019-09-06 13:57:23.576012357 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -12,3 +12,16 @@
+         "@org_golang_x_tools//go/analysis:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["lint.go"],
++    importpath = "honnef.co/go/tools/internal/sharedcheck",
++    visibility = ["//:__subpackages__"],
++    deps = [
++        "//internal/passes/buildssa:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "//ssa:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++    ],
++)
+--- a/lint/lintutil/BUILD.bazel	2019-09-06 13:58:13.191015017 -0700
++++ b/lint/lintutil/BUILD.bazel	2019-09-06 13:58:38.203172916 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -27,3 +27,25 @@
+     srcs = ["util_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "stats.go",
++        "stats_bsd.go",
++        "stats_posix.go",
++        "util.go",
++    ],
++    importpath = "honnef.co/go/tools/lint/lintutil",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//config:go_tool_library",
++        "//internal/cache:go_tool_library",
++        "//lint:go_tool_library",
++        "//lint/lintutil/format:go_tool_library",
++        "//version:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++        "@org_golang_x_tools//go/buildutil:go_tool_library",
++        "@org_golang_x_tools//go/packages:go_tool_library",
++    ],
++)
+--- a/version/BUILD.bazel	2019-09-06 14:00:58.438623378 -0700
++++ b/version/BUILD.bazel	2019-09-06 14:01:18.168234334 -0700
+@@ -1,10 +1,21 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = [
+         "buildinfo.go",
+         "buildinfo111.go",
++        "version.go",
++    ],
++    importpath = "honnef.co/go/tools/version",
++    visibility = ["//visibility:public"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "buildinfo.go",
++        "buildinfo111.go",
+         "version.go",
+     ],
+     importpath = "honnef.co/go/tools/version",
+--- a/lint/lintutil/format/BUILD.bazel	2019-09-06 14:02:14.752854565 -0700
++++ b/lint/lintutil/format/BUILD.bazel	2019-09-06 14:02:39.014492576 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,11 @@
+     visibility = ["//visibility:public"],
+     deps = ["//lint:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["format.go"],
++    importpath = "honnef.co/go/tools/lint/lintutil/format",
++    visibility = ["//visibility:public"],
++    deps = ["//lint:go_tool_library"],
++)
+--- a/printf/BUILD.bazel	2019-09-06 14:03:35.765123497 -0700
++++ b/printf/BUILD.bazel	2019-09-06 14:03:56.114785081 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -12,3 +12,10 @@
+     srcs = ["printf_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["printf.go"],
++    importpath = "honnef.co/go/tools/printf",
++    visibility = ["//visibility:public"],
++)
+--- a/staticcheck/vrp/BUILD.bazel	2019-09-06 14:08:11.170476268 -0700
++++ b/staticcheck/vrp/BUILD.bazel	2019-09-06 14:08:30.816080365 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -16,3 +16,20 @@
+         "//ssa:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "channel.go",
++        "int.go",
++        "slice.go",
++        "string.go",
++        "vrp.go",
++    ],
++    importpath = "honnef.co/go/tools/staticcheck/vrp",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//lint:go_tool_library",
++        "//ssa:go_tool_library",
++    ],
++)
+--- a/stylecheck/BUILD.bazel	2019-09-06 14:14:29.610310110 -0700
++++ b/stylecheck/BUILD.bazel	2019-09-06 14:14:52.072144156 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -31,3 +31,28 @@
+     embed = [":go_default_library"],
+     deps = ["//lint/testutil:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "analysis.go",
++        "doc.go",
++        "lint.go",
++        "names.go",
++    ],
++    importpath = "honnef.co/go/tools/stylecheck",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//config:go_tool_library",
++        "//facts:go_tool_library",
++        "//internal/passes/buildssa:go_tool_library",
++        "//lint:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "//lint/lintutil:go_tool_library",
++        "//ssa:go_tool_library",
++        "@org_golang_x_tools//go/analysis:go_tool_library",
++        "@org_golang_x_tools//go/analysis/passes/inspect:go_tool_library",
++        "@org_golang_x_tools//go/ast/inspector:go_tool_library",
++        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
++    ],
++)

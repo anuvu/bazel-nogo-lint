@@ -1,0 +1,515 @@
+--- a/config/BUILD.bazel	2019-09-04 15:32:27.404614942 -0700
++++ b/config/BUILD.bazel	2019-09-04 15:33:03.247541577 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,11 @@
+     visibility = ["//visibility:public"],
+     deps = ["@com_github_burntsushi_toml//:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["config.go"],
++    importpath = "github.com/golangci/go-tools/config",
++    visibility = ["//visibility:public"],
++    deps = ["@com_github_burntsushi_toml//:go_tool_library"],
++)
+--- a/lint/BUILD.bazel	2019-09-04 15:37:17.833219804 -0700
++++ b/lint/BUILD.bazel	2019-09-04 15:37:44.927432092 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -22,3 +22,19 @@
+     embed = [":go_default_library"],
+     deps = ["//lint/testutil:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "generated.go",
++        "lint.go",
++    ],
++    importpath = "github.com/golangci/go-tools/lint",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//config:go_tool_library",
++        "//ssa:go_tool_library",
++        "//ssa/ssautil:go_tool_library",
++        "@org_golang_x_tools//go/packages:go_tool_library",
++    ],
++)
+--- a/lint/lintutil/BUILD.bazel	2019-09-04 15:40:06.162964213 -0700
++++ b/lint/lintutil/BUILD.bazel	2019-09-04 15:40:29.352857707 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -19,3 +19,17 @@
+     srcs = ["util_test.go"],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["util.go"],
++    importpath = "github.com/golangci/go-tools/lint/lintutil",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//config:go_tool_library",
++        "//lint:go_tool_library",
++        "//lint/lintutil/format:go_tool_library",
++        "//version:go_tool_library",
++        "@org_golang_x_tools//go/packages:go_tool_library",
++    ],
++)
+--- a/simple/BUILD.bazel	2019-09-04 15:41:14.507456905 -0700
++++ b/simple/BUILD.bazel	2019-09-04 15:41:35.893931661 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -20,3 +20,17 @@
+     embed = [":go_default_library"],
+     deps = ["//lint/testutil:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["lint.go"],
++    importpath = "github.com/golangci/go-tools/simple",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//arg:go_tool_library",
++        "//internal/sharedcheck:go_tool_library",
++        "//lint:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
++    ],
++)
+--- a/staticcheck/BUILD.bazel	2019-09-04 15:42:10.960794930 -0700
++++ b/staticcheck/BUILD.bazel	2019-09-04 15:42:41.151260033 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -34,3 +34,27 @@
+         "//lint/testutil:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "buildtag.go",
++        "lint.go",
++        "rules.go",
++    ],
++    importpath = "github.com/golangci/go-tools/staticcheck",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//arg:go_tool_library",
++        "//deprecated:go_tool_library",
++        "//functions:go_tool_library",
++        "//internal/sharedcheck:go_tool_library",
++        "//lint:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "//ssa:go_tool_library",
++        "//ssautil:go_tool_library",
++        "//staticcheck/vrp:go_tool_library",
++        "@org_golang_x_tools//go/ast/astutil:go_tool_library",
++        "@org_golang_x_tools//go/packages:go_tool_library",
++    ],
++)
+--- a/stylecheck/BUILD.bazel	2019-09-04 15:43:15.310049156 -0700
++++ b/stylecheck/BUILD.bazel	2019-09-04 15:43:40.032067751 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -22,3 +22,19 @@
+     embed = [":go_default_library"],
+     deps = ["//lint/testutil:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "lint.go",
++        "names.go",
++    ],
++    importpath = "github.com/golangci/go-tools/stylecheck",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//lint:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "//ssa:go_tool_library",
++        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
++    ],
++)
+--- a/unused/BUILD.bazel	2019-09-04 15:44:58.650487078 -0700
++++ b/unused/BUILD.bazel	2019-09-04 15:45:20.292254165 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -22,3 +22,19 @@
+     embed = [":go_default_library"],
+     deps = ["//lint/testutil:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "implements.go",
++        "unused.go",
++    ],
++    importpath = "github.com/golangci/go-tools/unused",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//lint:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "@org_golang_x_tools//go/packages:go_tool_library",
++        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
++    ],
++)
+--- a/ssa/BUILD.bazel	2019-09-04 16:16:51.019995176 -0700
++++ b/ssa/BUILD.bazel	2019-09-04 16:17:13.477828896 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -84,3 +84,37 @@
+         "//conditions:default": [],
+     }),
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "blockopt.go",
++        "builder.go",
++        "const.go",
++        "create.go",
++        "doc.go",
++        "dom.go",
++        "emit.go",
++        "func.go",
++        "identical.go",
++        "identical_17.go",
++        "lift.go",
++        "lvalue.go",
++        "methods.go",
++        "mode.go",
++        "print.go",
++        "sanity.go",
++        "source.go",
++        "ssa.go",
++        "testmain.go",
++        "util.go",
++        "wrappers.go",
++        "write.go",
++    ],
++    importpath = "github.com/golangci/go-tools/ssa",
++    visibility = ["//visibility:public"],
++    deps = [
++        "@org_golang_x_tools//go/ast/astutil:go_tool_library",
++        "@org_golang_x_tools//go/types/typeutil:go_tool_library",
++    ],
++)
+--- a/ssa/ssautil/BUILD.bazel	2019-09-04 16:19:57.324089617 -0700
++++ b/ssa/ssautil/BUILD.bazel	2019-09-04 16:20:18.137789091 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -68,3 +68,19 @@
+         "//conditions:default": [],
+     }),
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "load.go",
++        "switch.go",
++        "visit.go",
++    ],
++    importpath = "github.com/golangci/go-tools/ssa/ssautil",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//ssa:go_tool_library",
++        "@org_golang_x_tools//go/loader:go_tool_library",
++        "@org_golang_x_tools//go/packages:go_tool_library",
++    ],
++)
+--- a/lint/lintutil/format/BUILD.bazel	2019-09-04 16:21:09.818008868 -0700
++++ b/lint/lintutil/format/BUILD.bazel	2019-09-04 16:21:31.255759297 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,11 @@
+     visibility = ["//visibility:public"],
+     deps = ["//lint:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["format.go"],
++    importpath = "github.com/golangci/go-tools/lint/lintutil/format",
++    visibility = ["//visibility:public"],
++    deps = ["//lint:go_tool_library"],
++)
+--- a/version/BUILD.bazel	2019-09-04 16:26:49.269814308 -0700
++++ b/version/BUILD.bazel	2019-09-04 16:27:17.276101069 -0700
+@@ -1,8 +1,15 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = ["version.go"],
+     importpath = "github.com/golangci/go-tools/version",
+     visibility = ["//visibility:public"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["version.go"],
++    importpath = "github.com/golangci/go-tools/version",
++    visibility = ["//visibility:public"],
+ )
+--- a/arg/BUILD.bazel	2019-09-04 16:33:05.694714749 -0700
++++ b/arg/BUILD.bazel	2019-09-04 16:33:22.832114047 -0700
+@@ -1,8 +1,15 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = ["arg.go"],
+     importpath = "github.com/golangci/go-tools/arg",
+     visibility = ["//visibility:public"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["arg.go"],
++    importpath = "github.com/golangci/go-tools/arg",
++    visibility = ["//visibility:public"],
+ )
+--- a/internal/sharedcheck/BUILD.bazel	2019-09-04 16:34:05.199573422 -0700
++++ b/internal/sharedcheck/BUILD.bazel	2019-09-04 16:34:27.441389504 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -11,3 +11,15 @@
+         "//ssa:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["lint.go"],
++    importpath = "github.com/golangci/go-tools/internal/sharedcheck",
++    visibility = ["//:__subpackages__"],
++    deps = [
++        "//lint:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "//ssa:go_tool_library",
++    ],
++)
+--- a/lint/lintdsl/BUILD.bazel	2019-09-04 16:35:08.812767547 -0700
++++ b/lint/lintdsl/BUILD.bazel	2019-09-04 16:35:30.362564391 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -10,3 +10,14 @@
+         "//ssa:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["lintdsl.go"],
++    importpath = "github.com/golangci/go-tools/lint/lintdsl",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//lint:go_tool_library",
++        "//ssa:go_tool_library",
++    ],
++)
+--- a/deprecated/BUILD.bazel	2019-09-04 16:36:16.840035228 -0700
++++ b/deprecated/BUILD.bazel	2019-09-04 16:36:35.269540029 -0700
+@@ -1,8 +1,15 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+     srcs = ["stdlib.go"],
+     importpath = "github.com/golangci/go-tools/deprecated",
+     visibility = ["//visibility:public"],
++)
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["stdlib.go"],
++    importpath = "github.com/golangci/go-tools/deprecated",
++    visibility = ["//visibility:public"],
+ )
+--- a/functions/BUILD.bazel	2019-09-04 16:37:10.352404604 -0700
++++ b/functions/BUILD.bazel	2019-09-04 16:37:31.130101138 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -19,3 +19,23 @@
+         "//staticcheck/vrp:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "concrete.go",
++        "functions.go",
++        "loops.go",
++        "pure.go",
++        "terminates.go",
++    ],
++    importpath = "github.com/golangci/go-tools/functions",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//callgraph:go_tool_library",
++        "//callgraph/static:go_tool_library",
++        "//lint/lintdsl:go_tool_library",
++        "//ssa:go_tool_library",
++        "//staticcheck/vrp:go_tool_library",
++    ],
++)
+--- a/callgraph/BUILD.bazel	2019-09-04 16:40:11.891321633 -0700
++++ b/callgraph/BUILD.bazel	2019-09-04 16:40:35.113600792 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -10,3 +10,14 @@
+     visibility = ["//visibility:public"],
+     deps = ["//ssa:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "callgraph.go",
++        "util.go",
++    ],
++    importpath = "github.com/golangci/go-tools/callgraph",
++    visibility = ["//visibility:public"],
++    deps = ["//ssa:go_tool_library"],
++)
+--- a/callgraph/static/BUILD.bazel	2019-09-04 16:41:14.833896837 -0700
++++ b/callgraph/static/BUILD.bazel	2019-09-04 16:41:35.123553522 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -22,3 +22,15 @@
+         "@org_golang_x_tools//go/loader:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["static.go"],
++    importpath = "github.com/golangci/go-tools/callgraph/static",
++    visibility = ["//visibility:public"],
++    deps = [
++        "//callgraph:go_tool_library",
++        "//ssa:go_tool_library",
++        "//ssa/ssautil:go_tool_library",
++    ],
++)
+--- a/staticcheck/vrp/BUILD.bazel	2019-09-04 16:42:19.579183400 -0700
++++ b/staticcheck/vrp/BUILD.bazel	2019-09-04 16:42:37.704663376 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -13,3 +13,17 @@
+     visibility = ["//visibility:public"],
+     deps = ["//ssa:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "channel.go",
++        "int.go",
++        "slice.go",
++        "string.go",
++        "vrp.go",
++    ],
++    importpath = "github.com/golangci/go-tools/staticcheck/vrp",
++    visibility = ["//visibility:public"],
++    deps = ["//ssa:go_tool_library"],
++)
+--- a/ssautil/BUILD.bazel	2019-09-04 16:43:32.865167324 -0700
++++ b/ssautil/BUILD.bazel	2019-09-04 16:43:52.298754110 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -7,3 +7,11 @@
+     visibility = ["//visibility:public"],
+     deps = ["//ssa:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = ["ssautil.go"],
++    importpath = "github.com/golangci/go-tools/ssautil",
++    visibility = ["//visibility:public"],
++    deps = ["//ssa:go_tool_library"],
++)

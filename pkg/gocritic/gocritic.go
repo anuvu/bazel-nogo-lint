@@ -1,7 +1,6 @@
 package gocritic
 
 import (
-	"context"
 	"fmt"
 	"go/ast"
 	"go/types"
@@ -12,11 +11,11 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/go-lintpack/lintpack"
 	"github.com/anuvu/bazel-nogo-lint/pkg/config"
-	"github.com/anuvu/bazel-nogo-lint/pkg/fsutils"
 	"github.com/anuvu/bazel-nogo-lint/pkg/result"
 	"github.com/anuvu/bazel-nogo-lint/pkg/util"
+	"github.com/go-lintpack/lintpack"
+	log "github.com/sirupsen/logrus"
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/loader"
 )
@@ -82,8 +81,8 @@ func configureCheckerInfo(info *lintpack.CheckerInfo, allParams map[string]confi
 	return nil
 }
 
-func (lint Gocritic) buildEnabledCheckers(lintCtx *linter.Context, lintpackCtx *lintpack.Context) ([]*lintpack.Checker, error) {
-	s := lintCtx.Settings().Gocritic
+func buildEnabledCheckers(lintpackCtx *lintpack.Context) ([]*lintpack.Checker, error) {
+	s := &config.GocriticSettings{}
 	allParams := s.GetLowercasedParams()
 
 	var enabledCheckers []*lintpack.Checker
@@ -107,9 +106,23 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	sizes := types.SizesFor("gc", runtime.GOARCH)
 	lintpackCtx := lintpack.NewContext(pass.Fset, sizes)
 
-	enabledCheckers, err := buildEnabledCheckers(lintCtx, lintpackCtx)
+	enabledCheckers, err := buildEnabledCheckers(lintpackCtx)
 	if err != nil {
 		return nil, err
+	}
+
+	var createdPkgs []*loader.PackageInfo
+	createdPkgs = append(createdPkgs, util.MakeFakeLoaderPackageInfo(pass))
+	allPkgs := map[*types.Package]*loader.PackageInfo{}
+	for _, pkg := range createdPkgs {
+		pkg := pkg
+		allPkgs[pkg.Pkg] = pkg
+	}
+	prog := &loader.Program{
+		Fset:        pass.Fset,
+		Imported:    nil,         // not used without .Created in any linter
+		Created:     createdPkgs, // all initial packages
+		AllPackages: allPkgs,     // all initial packages and their depndencies
 	}
 
 	issuesCh := make(chan result.Issue, 1024)
@@ -118,11 +131,11 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		defer func() {
 			if err := recover(); err != nil {
 				panicErr = fmt.Errorf("panic occurred: %s", err)
-				lintCtx.Log.Warnf("Panic: %s", debug.Stack())
+				log.Warnf("Panic: %s", string(debug.Stack()))
 			}
 		}()
 
-		for _, pkgInfo := range lintCtx.Program.InitialPackages() {
+		for _, pkgInfo := range prog.InitialPackages() {
 			lintpackCtx.SetPackageInfo(&pkgInfo.Info, pkgInfo.Pkg)
 			runOnPackage(lintpackCtx, enabledCheckers, pkgInfo, issuesCh)
 		}
@@ -137,7 +150,11 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		return nil, panicErr
 	}
 
-	return res, nil
+	for _, i := range res {
+		pass.Reportf(i.IPos, "[%s(%s)] %s", Name, i.FromLinter, i.Text)
+	}
+
+	return nil, nil
 }
 
 func runOnPackage(lintpackCtx *lintpack.Context, checkers []*lintpack.Checker,

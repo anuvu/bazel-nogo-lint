@@ -1,0 +1,30 @@
+--- a/BUILD.bazel	2019-09-04 16:10:51.926174604 -0700
++++ b/BUILD.bazel	2019-09-04 16:11:10.651703575 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -26,3 +26,21 @@
+     ],
+     embed = [":go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "decode.go",
++        "decode_meta.go",
++        "doc.go",
++        "encode.go",
++        "encoding_types.go",
++        "encoding_types_1.1.go",
++        "lex.go",
++        "parse.go",
++        "type_check.go",
++        "type_fields.go",
++    ],
++    importpath = "github.com/BurntSushi/toml",
++    visibility = ["//visibility:public"],
++)

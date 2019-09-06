@@ -44,3 +44,34 @@
 +    importpath = "golang.org/x/text/transform",
 +    visibility = ["//visibility:public"],
 +)
+--- a/unicode/norm/BUILD.bazel	2019-09-05 13:11:12.669911348 -0700
++++ b/unicode/norm/BUILD.bazel	2019-09-05 13:11:35.431769892 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -40,3 +40,22 @@
+         "//transform:go_default_library",
+     ],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "composition.go",
++        "forminfo.go",
++        "input.go",
++        "iter.go",
++        "normalize.go",
++        "readwriter.go",
++        "tables10.0.0.go",
++        "tables9.0.0.go",
++        "transform.go",
++        "trie.go",
++    ],
++    importpath = "golang.org/x/text/unicode/norm",
++    visibility = ["//visibility:public"],
++    deps = ["//transform:go_tool_library"],
++)

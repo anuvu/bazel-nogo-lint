@@ -1,0 +1,33 @@
+--- a/BUILD.bazel	2019-09-04 16:48:05.228599274 -0700
++++ b/BUILD.bazel	2019-09-04 16:48:38.707332869 -0700
+@@ -1,4 +1,4 @@
+-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
++load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test", "go_tool_library")
+ 
+ go_library(
+     name = "go_default_library",
+@@ -32,3 +32,24 @@
+     embed = [":go_default_library"],
+     deps = ["@in_gopkg_check_v1//:go_default_library"],
+ )
++
++go_tool_library(
++    name = "go_tool_library",
++    srcs = [
++        "apic.go",
++        "decode.go",
++        "emitterc.go",
++        "encode.go",
++        "parserc.go",
++        "readerc.go",
++        "resolve.go",
++        "scannerc.go",
++        "sorter.go",
++        "writerc.go",
++        "yaml.go",
++        "yamlh.go",
++        "yamlprivateh.go",
++    ],
++    importpath = "gopkg.in/yaml.v2",
++    visibility = ["//visibility:public"],
++)
